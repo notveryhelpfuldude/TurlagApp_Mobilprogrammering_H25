@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
 
 const ROLES = ['turist', 'guide', 'admin'];
 
 const LoginForm = () => {
+    const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('turist'); 
+    const [role, setRole] = useState('turist'); // 'turist' | 'guide' | 'admin'
 
     const handleLogin = () => {
          if (!email || !password) {
@@ -16,11 +18,13 @@ const LoginForm = () => {
             return;
         }
 
-        // TODO: erstatt med ekte autentisering og navigasjon
-        // Eksempel på valg:
-        // if (role === 'turist') navigation.navigate('TouristHome');
-        // else if (role === 'guide') navigation.navigate('GuideHome');
-        // else navigation.navigate('AdminHome');
+        // TODO: Erstatt med ekte autentisering 
+
+        // Enkel ruting basert på rolle 
+        if (role === 'turist') navigation.navigate('TouristHome');
+        else if (role === 'guide') navigation.navigate('GuideHome');
+        else navigation.navigate('AdminHome');
+
         Alert.alert('Innlogging vellykket', `Velkommen, ${email}! (rolle: ${role})`);
     };
 
