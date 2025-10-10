@@ -49,9 +49,24 @@ const LoginForm = () => {
 
             <Text style={[styles.label, { marginTop: 8 }]}>Velg rolle</Text>
             <View style={styles.roleGroup}>
-                <Checkbox label="Turist" checked={role === 'turist'} onPress={() => setRole('turist')} />
-                <Checkbox label="Guide"  checked={role === 'guide'}  onPress={() => setRole('guide')} />
-                <Checkbox label="Admin"  checked={role === 'admin'}  onPress={() => setRole('admin')} />
+                <Checkbox
+                    value={role === 'turist'}
+                    onValueChange={() => setRole('turist')}
+                    style={styles.checkbox}
+                />
+                <Text style={styles.roleLabel}>Turist</Text>
+                <Checkbox
+                    value={role === 'guide'}
+                    onValueChange={() => setRole('guide')}
+                    style={styles.checkbox}
+                />
+                <Text style={styles.roleLabel}>Guide</Text>
+                <Checkbox
+                    value={role === 'admin'}
+                    onValueChange={() => setRole('admin')}
+                    style={styles.checkbox}
+                />
+                <Text style={styles.roleLabel}>Admin</Text>
             </View>
 
             <Button title="Logg inn" onPress={handleLogin} />
@@ -85,6 +100,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     roleGroup: {
+        flexDirection: 'row',
+        alignItems: 'center',
         gap: 10,
         marginBottom: 16,
     },
