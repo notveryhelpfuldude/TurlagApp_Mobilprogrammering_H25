@@ -4,13 +4,13 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
 
-const ROLES = ['turist', 'guide', 'admin'];
+const ROLES = ['tourist', 'guide', 'admin'];
 
 const LoginForm = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('turist'); // 'turist' | 'guide' | 'admin'
+    const [role, setRole] = useState('tourist'); // 'tourist' | 'guide' | 'admin'
 
     const handleLogin = () => {
          if (!email || !password) {
@@ -21,9 +21,9 @@ const LoginForm = () => {
         // TODO: Erstatt med ekte autentisering 
 
         // Enkel ruting basert på rolle 
-        if (role === 'turist') navigation.navigate('TouristHome');
-        else if (role === 'guide') navigation.navigate('GuideHome');
-        else navigation.navigate('AdminHome');
+        if (role === 'tourist') navigation.navigate('tourist');
+        else if (role === 'guide') navigation.navigate('guide');
+        else navigation.navigate('admin');
 
         Alert.alert('Innlogging vellykket', `Velkommen, ${email}! (rolle: ${role})`);
     };
@@ -54,8 +54,8 @@ const LoginForm = () => {
             <Text style={[styles.label, { marginTop: 8 }]}>Velg rolle</Text>
             <View style={styles.roleGroup}>
                 <Checkbox
-                    value={role === 'turist'}
-                    onValueChange={() => setRole('turist')}
+                    value={role === 'tourist'}
+                    onValueChange={() => setRole('tourist')}
                     style={styles.checkbox}
                 />
                 <Text style={styles.roleLabel}>Turist</Text>
