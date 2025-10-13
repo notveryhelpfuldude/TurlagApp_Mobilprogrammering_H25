@@ -1,34 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Redirect } from 'expo-router';
+import { useAuth } from '../src/state/auth';
 
-export default function Page() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
-  );
+export default function Index() {
+  const { token, role } = useAuth();
+  if (!token) return <Redirect href="/(auth)/sign-in" />;
+
+  switch (role) {
+    case 'tourist': return <Redirect href="/(tourist)/" />;
+    case 'guide':   return <Redirect href="/(guide)/tours" />;
+    case 'admin':   return <Redirect href="/(admin)/dashboard" />;
+    default:        return <Redirect href="/(auth)/sign-in" />;
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});
