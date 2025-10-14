@@ -6,9 +6,11 @@ import  LoginForm  from '../(auth)/LoginForm';
 export default function SignIn() {
   const { signIn } = useAuth();
 
-return {
-  
-}
+  return (
+    <View style={{ flex: 1 }}>
+      <LoginForm/>
+    </View>
+  )
 /*
   return (
     <View style={{ flex: 1, justifyContent: 'center', gap: 12, padding: 16 }}>
