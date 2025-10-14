@@ -9,6 +9,6 @@ export default function Index() {
     case 'tourist': return <Redirect href="/(tourist)/" />;
     case 'guide':   return <Redirect href="/(guide)/tours" />;
     case 'admin':   return <Redirect href="/(admin)/dashboard" />;
-    default:        return <Redirect href="/(auth)/sign-in" />;
+    default:        return <Redirect href="/(auth)/LoginForm" />;
   }
 }
