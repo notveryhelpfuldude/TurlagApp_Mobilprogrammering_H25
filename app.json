@@ -1,0 +1,22 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "5641acf4-9571-40c6-a321-2715bd922e12"
+      }
+    },
+    "android": {
+      "package": "com.turlagapp.turlagapp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.turlagapp.turlagapp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  },
+  "scheme": "your-app-scheme"
+}
