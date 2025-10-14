@@ -3,7 +3,7 @@ import { useAuth } from '../../src/state/auth';
 
 export default function GuideTabs() {
   const { token, role } = useAuth();
-  if (!token || role !== 'guide') return <Redirect href="/(auth)/sign-in" />;
+  //if (!token || role !== 'guide') return <Redirect href="/(auth)/sign-in" />;
 
   return (
     <Tabs screenOptions={{ headerShown: false }}>
