@@ -6,11 +6,14 @@ import  LoginForm  from '../(auth)/LoginForm';
 export default function SignIn() {
   const { signIn } = useAuth();
 
+return {
+  
+}
+/*
   return (
     <View style={{ flex: 1, justifyContent: 'center', gap: 12, padding: 16 }}>
       <Text style={{ fontSize: 22, fontWeight: '700', marginBottom: 8 }}>Logg inn</Text>
 
-      {/* Demo-innlogging. Bytt til ekte form når dere vil */}
       <Button title="Turist"
         onPress={() => { signIn({ token: 'demo', role: 'tourist', displayName: 'Luka' }); router.replace('/(tourist)/'); }} />
       <Button title="Guide"
@@ -19,4 +22,6 @@ export default function SignIn() {
         onPress={() => { signIn({ token: 'demo', role: 'admin', displayName: 'Luka' }); router.replace('/(admin)/dashboard'); }} />
     </View>
   );
+*/
 }
+
