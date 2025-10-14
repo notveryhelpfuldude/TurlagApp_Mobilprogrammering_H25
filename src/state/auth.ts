@@ -10,5 +10,8 @@ export function useAuth() {
       console.error('Error, you failed:', err);
     }
   };
-    return {token, role, signIn}
+  const signOut = () => {
+    SignIn()
+  }
+    return {token, role, signIn, signOut}
 }
