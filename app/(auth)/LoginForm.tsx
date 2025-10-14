@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
 import { router } from 'expo-router';
 
-const ROLES = ['turist', 'guide', 'admin'];
+const ROLES = ['tourist', 'guide', 'admin'];
 
 const LoginForm = () => {
     const navigation = useNavigation();
@@ -20,11 +20,11 @@ const LoginForm = () => {
         }
         // TODO: Erstatt med ekte autentisering 
 
-        // Enkel ruting basert på rolle ;
+        // Enkel ruting basert på rolle;
         /*
-        Alert.alert('Innlogging vellykket', `Velkommen, ${email}! (rolle: ${role})`);
+        Alert.alert('Innlogging vellykke t', `Velkommen, ${email}! (rolle: ${role})`);
         */
-        if (role === 'turist') router.replace('/(tourist)/');
+        if (role === 'tourist') router.replace('/(tourist)/');
         else if (role === 'guide') router.replace('/(guide)/tours');
         else router.replace('/(admin)/dashboard');
     
@@ -57,8 +57,8 @@ const LoginForm = () => {
             <Text style={[styles.label, { marginTop: 8 }]}>Velg rolle</Text>
             <View style={styles.roleGroup}>
                 <Checkbox
-                    value={role === 'turist'}
-                    onValueChange={() => setRole('turist')}
+                    value={role === 'tourist'}
+                    onValueChange={() => setRole('tourist')}
                     style={styles.checkbox}
                 />
                 <Text style={styles.roleLabel}>Turist</Text>
