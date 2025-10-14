@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
 import { router } from 'expo-router';
 import { useAuth } from '../../src/state/auth';
+import SignIn from './sign-in';
 
 type Role = 'tourist' | 'guide' | 'admin';
 
@@ -19,10 +20,23 @@ const LoginForm = () => {
             Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
             return;
         }
-
         // TODO: Erstatt med ekte autentisering 
 
         // Enkel ruting basert på rolle;
+        switch (role) {
+            case 'tourist':
+                router.replace('/(tourist)/');
+                break;
+            case 'guide':
+                router.replace('/(guide)/tours');
+                break;
+            case 'admin':
+                router.replace('/(admin)/dashboard');
+                break;
+            default:
+                Alert.alert('Feil', 'Ugyldig rolle valgt.');
+                return;
+        }
         /*
         Alert.alert('Innlogging vellykke t', `Velkommen, ${email}! (rolle: ${role})`);
         */
