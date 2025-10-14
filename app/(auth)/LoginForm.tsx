@@ -3,8 +3,12 @@ import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
+import { router } from 'expo-router';
 
-const ROLES = ['turist', 'guide', 'admin'];
+type Role = ['turist', 'guide', 'admin'];
+type Props = {
+  onSubmit: (payload: { email: string; password: string; role: Role }) => void;
+};
 
 const LoginForm = () => {
     const navigation = useNavigation();
@@ -17,15 +21,12 @@ const LoginForm = () => {
             Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
             return;
         }
-
         // TODO: Erstatt med ekte autentisering 
 
-        // Enkel ruting basert på rolle 
-        if (role === 'turist') navigation.navigate('TouristHome');
-        else if (role === 'guide') navigation.navigate('GuideHome');
-        else navigation.navigate('AdminHome');
-
+        // Enkel ruting basert på rolle ;
+        /*
         Alert.alert('Innlogging vellykket', `Velkommen, ${email}! (rolle: ${role})`);
+        */        
     };
 
     return (
