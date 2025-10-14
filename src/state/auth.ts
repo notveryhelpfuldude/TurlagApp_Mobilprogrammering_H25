@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import SignIn from "../../app/(auth)/sign-in"
 
 export function useAuth() {
@@ -11,7 +12,8 @@ export function useAuth() {
     }
   };
   const signOut = () => {
-    SignIn()
+    //tilbake til sign in screen
+    router.replace('/(auth)/sign-in')
   }
     return {token, role, signIn, signOut}
 }
