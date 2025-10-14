@@ -4,6 +4,7 @@ import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
 import { router } from 'expo-router';
+import { useAuth } from '../../src/state/auth';
 
 type Role = 'tourist' | 'guide' | 'admin';
 
@@ -18,6 +19,7 @@ const LoginForm = () => {
             Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
             return;
         }
+
         // TODO: Erstatt med ekte autentisering 
 
         // Enkel ruting basert på rolle;
