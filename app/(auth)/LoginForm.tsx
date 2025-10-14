@@ -5,10 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Checkbox from 'expo-checkbox';
 import { router } from 'expo-router';
 
-type Role = ['turist', 'guide', 'admin'];
-type Props = {
-  onSubmit: (payload: { email: string; password: string; role: Role }) => void;
-};
+const ROLES = ['turist', 'guide', 'admin'];
 
 const LoginForm = () => {
     const navigation = useNavigation();
@@ -26,7 +23,12 @@ const LoginForm = () => {
         // Enkel ruting basert på rolle ;
         /*
         Alert.alert('Innlogging vellykket', `Velkommen, ${email}! (rolle: ${role})`);
-        */        
+        */
+        if (role === 'turist') router.replace('/(tourist)/');
+        else if (role === 'guide') router.replace('/(guide)/tours');
+        else router.replace('/(admin)/dashboard');
+    
+        
     };
 
     return (
