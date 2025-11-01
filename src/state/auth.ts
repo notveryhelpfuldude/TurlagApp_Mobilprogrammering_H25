@@ -1,6 +1,12 @@
 import { router } from "expo-router";
 import SignIn from "../../app/(auth)/sign-in"
 
+const ROLES = {
+  ADMIN: "ADMIN",
+  GUIDE: "GUIDE",
+  USER: "USER",
+} as const;
+
 export function useAuth() {
     const token = "test"
     const role = "test"
