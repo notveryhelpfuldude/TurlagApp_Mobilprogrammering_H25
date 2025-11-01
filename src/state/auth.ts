@@ -53,7 +53,21 @@ const getUser = async (fail   = false) => {
 }
 
 
-
+export default function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const login = useCallback(async (email: string, password: string) => {
+    setIsLoading(true);
+    try {
+      const fetchedUser = await getUser();
+      setUser(fetchedUser);
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+}
 export function useAuth() {
     const token = "test"
     const role = "test"
