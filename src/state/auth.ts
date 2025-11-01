@@ -7,6 +7,17 @@ const ROLES = {
   USER: "USER",
 } as const;
 
+type Role = typeof ROLES[keyof typeof ROLES];
+
+type User = {
+  id: string;
+  displayName: string;
+  email: string;
+  phoeneNumber?: string;
+  password?: string;
+  role: Role;
+};
+
 export function useAuth() {
     const token = "test"
     const role = "test"
