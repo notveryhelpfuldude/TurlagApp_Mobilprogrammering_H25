@@ -35,6 +35,24 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
 });
 
+const getUser = async (fail   = false) => {
+  return new Promise<User>((resolve, reject) => {
+    setTimeout(() => {
+      if (fail) {
+        reject("Failed to fetch user");
+      } else {
+        resolve({
+          id: "1",
+          displayName: "Test User",
+          email: "123",
+          role: ROLES.USER,
+        });
+      }
+    }, 1000);
+  });
+}
+
+
 
 export function useAuth() {
     const token = "test"
