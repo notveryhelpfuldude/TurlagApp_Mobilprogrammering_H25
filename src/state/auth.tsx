@@ -52,10 +52,24 @@ const getUser = async (fail   = false) => {
   });
 }
 
-
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        const fetchedUser = await getUser();
+        setUser(fetchedUser);
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchUser();
+  }, []);
+  
   const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
