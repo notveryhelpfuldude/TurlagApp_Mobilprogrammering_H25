@@ -36,16 +36,18 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 const getUser = async (fail   = false) => {
-  return new Promise<User>((resolve, reject) => {
+  return new Promise<{data : User | null}>((resolve, reject) => {
     setTimeout(() => {
       if (fail) {
         reject("Failed to fetch user");
       } else {
         resolve({
+          data: {
           id: "1",
           displayName: "Test User",
           email: "123",
           role: ROLES.USER,
+        }
         });
       }
     }, 1000);
@@ -74,7 +76,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     setIsLoading(true);
     try {
       setUser({displayName: "Test User", email, id: "1", role: ROLES.USER, password});
-      alert("User With email " + email + " logged in!");
+      
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
