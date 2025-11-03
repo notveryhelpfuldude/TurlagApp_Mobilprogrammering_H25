@@ -71,20 +71,6 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 }
 
 export const useAuth = () => {
-    const token = "test"
-    const role = "test"
     const context = use(AuthContext);
-    
-    //midlertidig signin funksjon, må gjøres async med database etc...
-    const signIn = async ({token, role, displayName}) => {
-    try {
-    } catch (err) {
-      console.error('Error, you failed:', err);
-    }
-  };
-  const signOut = () => {
-    //tilbake til sign in screen
-    router.replace('/(auth)/sign-in')
-  }
     return {context}
 }
