@@ -61,8 +61,8 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     const fetchUser = async () => {
       setIsLoading(true);
       try {
-        const fetchedUser = await getUser();
-        setUser(fetchedUser);
+        const {data } = await getUser();
+        setUser(data);
       } catch (error) {
         setUser(null);
       } finally {
