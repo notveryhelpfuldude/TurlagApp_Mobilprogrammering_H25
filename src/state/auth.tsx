@@ -76,6 +76,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     setIsLoading(true);
     try {
       setUser({displayName: "Test User", email, id: "1", role: ROLES.USER, password});
+      alert("User Set as " + email +  "with password " + password);
       
     } catch (error) {
       console.error("Login failed:", error);
