@@ -1,16 +1,9 @@
 import { Stack } from 'expo-router';
 import AuthProvider, {useAuth} from '../src/state/auth';
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
-  AuthProvider({ children });
-  return (
-    <>
-      {children}
-    </>
-  );
-}
 
-export default function RootLayout() {
+
+export function RootLayout() {
   const {  } = useAuth();
   return (
     <Stack screenOptions={{ headerShown: false }}>
@@ -21,4 +14,11 @@ export default function RootLayout() {
       <Stack.Screen name="(admin)" />
     </Stack>
   );
+}
+export default function LayoutWithProviders() {
+  return (
+    <AuthProvider>
+      <RootLayout></RootLayout>
+    </AuthProvider>
+  )
 }
