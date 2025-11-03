@@ -56,18 +56,17 @@ const getUser = async (fail   = false) => {
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const login = useCallback(async (email: string, password: string) => {
+  const login = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const fetchedUser = await getUser();
-      setUser(fetchedUser);
-      alert(fetchedUser.displayName + " logged in!");
+      setUser({displayName: "Test User", email, id: "1", role: ROLES.USER});
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login failed:", error);
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  };
+
   return (
     <AuthContext.Provider value={{ user, isLoading, login, register: async () => {}, logout: async () => {} }}>
       {children}
