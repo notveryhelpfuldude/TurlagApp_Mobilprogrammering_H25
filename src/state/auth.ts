@@ -30,7 +30,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: false,
-  login: async () => {},
+  login: async (email: string, password: string) => {},
   register: async () => {},
   logout: async () => {},
 });
@@ -61,16 +61,16 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     try {
       const fetchedUser = await getUser();
       setUser(fetchedUser);
+      alert(fetchedUser.displayName + " logged in!");
     } catch (error) {
       console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }
   }, []);
-  
 }
 
 export const useAuth = () => {
     const context = use(AuthContext);
-    return {context}
+    return context
 }

@@ -11,6 +11,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function RootLayout() {
+  const {  } = useAuth();
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />

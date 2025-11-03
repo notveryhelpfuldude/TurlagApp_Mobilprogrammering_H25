@@ -2,7 +2,7 @@ import { Redirect } from 'expo-router';
 import { useAuth } from '../src/state/auth';
 
 export default function Index() {
-  const {context} = useAuth();
+  const context = useAuth();
   if (context.user == null) return <Redirect href="/(auth)/sign-in" />;
 
   switch (context.user.role) {
