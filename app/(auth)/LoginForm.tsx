@@ -14,34 +14,32 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('turist'); // 'turist' | 'guide' | 'admin'
+    const { login, isLoading, user } = useAuth();
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
          if (!email || !password) {
             Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
             return;
         }
-        // TODO: Erstatt med ekte autentisering 
 
-        // Enkel ruting basert på rolle;
-        switch (role) {
-            case 'tourist':
-                router.replace('/(tourist)/');
-                break;
-            case 'guide':
-                router.replace('/(guide)/tours');
-                break;
-            case 'admin':
-                router.replace('/(admin)/dashboard');
-                break;
-            default:
-                Alert.alert('Feil', 'Ugyldig rolle valgt.');
-                return;
+        try {
+            await login(email, password);
+            switch (role) {
+                case 'tourist':
+                    router.replace('/(tourist)/');
+                    break;
+                case 'guide':
+                    router.replace('/(guide)/tours');
+                    break;
+                case 'admin':
+                    router.replace('/(admin)/dashboard');
+                    break;
+                default:
+                    Alert.alert('Feil', 'Ugyldig rolle valgt.');
+            }
+        } catch (err) {
+            Alert.alert('Feil', 'Innlogging feilet.');
         }
-        /*
-        Alert.alert('Innlogging vellykke t', `Velkommen, ${email}! (rolle: ${role})`);
-        */
-
-        
     };
 
     return (
