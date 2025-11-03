@@ -67,10 +67,14 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       setIsLoading(false);
     }
   }, []);
+  
 }
-export function useAuth() {
+
+export const useAuth = () => {
     const token = "test"
     const role = "test"
+    const context = use(AuthContext);
+    
     //midlertidig signin funksjon, må gjøres async med database etc...
     const signIn = async ({token, role, displayName}) => {
     try {
@@ -82,5 +86,5 @@ export function useAuth() {
     //tilbake til sign in screen
     router.replace('/(auth)/sign-in')
   }
-    return {token, role, signIn, signOut}
+    return {context}
 }
