@@ -3,9 +3,9 @@ import SignIn from "../../app/(auth)/sign-in"
 import { createContext, use, useCallback, useEffect, useState } from "react";
 
 const ROLES = {
-  ADMIN: "ADMIN",
-  GUIDE: "GUIDE",
-  USER: "USER",
+  ADMIN: "Admin",
+  GUIDE: "Guide",
+  USER: "Tourist",
 } as const;
 
 type Role = typeof ROLES[keyof typeof ROLES];
