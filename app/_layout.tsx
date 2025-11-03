@@ -1,4 +1,14 @@
 import { Stack } from 'expo-router';
+import AuthProvider, {useAuth} from '../src/state/auth';
+
+export const Layout = ({ children }: { children: React.ReactNode }) => {
+  AuthProvider({ children });
+  return (
+    <>
+      {children}
+    </>
+  );
+}
 
 export default function RootLayout() {
   return (
