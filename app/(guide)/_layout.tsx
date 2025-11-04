@@ -15,7 +15,7 @@ export default function GuideTabs() {
     );
   }
 
-  if (!user || user.role !== "guide") {
+  if (!user || user.role !== "Guide") {
     return <Redirect href="/(auth)/sign-in" />;
   }
 

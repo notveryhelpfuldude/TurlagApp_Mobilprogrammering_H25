@@ -8,7 +8,6 @@ import { useAuth } from '../../src/state/auth';
 type Role = 'tourist' | 'guide' | 'admin';
 
 const LoginForm = () => {
-    const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('turist'); // 'turist' | 'guide' | 'admin'
@@ -19,9 +18,8 @@ const LoginForm = () => {
             Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
             return;
         }
-
         try {
-            await login(email, password);
+            await login(email, password, "Guide");
             switch (role) {
                 case 'tourist':
                     router.replace('/(tourist)/');
