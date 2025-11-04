@@ -60,15 +60,18 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       }
     })();
   }, []);
-  
-  const login = async (email: string, password: string) => {
+
+  const login = async (email: string, password: string, role: Role) => {
     setIsLoading(true);
     try {
-      setUser({displayName: "Test User", email, id: "1", role: ROLES.USER, password});
-      alert("User Set as " + email +  "with password " + password);
-      
-    } catch (error) {
-      console.error("Login failed:", error);
+      await new Promise((r) => setTimeout(r, 250));
+      setUser({
+        id: "1",
+        displayName: "Test User",
+        email,
+        role, 
+        password,
+      });
     } finally {
       setIsLoading(false);
     }
