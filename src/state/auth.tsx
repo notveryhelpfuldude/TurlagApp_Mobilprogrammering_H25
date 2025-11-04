@@ -92,6 +92,10 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       setIsLoading(false);
     }
   };
+  
+  const register = async (email: string, password: string, role: Role) => {
+    return login(email, password, role);
+  };
 
   return (
     <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
