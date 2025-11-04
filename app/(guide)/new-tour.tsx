@@ -3,8 +3,11 @@ import { View, Text, TextInput, Pressable, Alert, Image, ScrollView } from "reac
 import { fakeDb } from "../../src/types/fakeDb";
 import { useRouter } from "expo-router";
 
+<<<<<<< HEAD
 // I alpha trykker vi bare "Velg bilde (dummy)" som setter en placeholder-URI.
 // Når backend er klar: bruk ImagePicker eller last opp til S3 og lagre URL.
+=======
+>>>>>>> c3b7cf9 (la til bestilling, guide panel, meldinger og fikset errors)
 const DUMMY_IMG = "https://picsum.photos/400/240";
 
 export default function NewTourScreen() {
@@ -42,7 +45,10 @@ export default function NewTourScreen() {
       return;
     }
 
+<<<<<<< HEAD
     // I alpha antar vi at "innlogget guide" har id "demo-guide-1".
+=======
+>>>>>>> c3b7cf9 (la til bestilling, guide panel, meldinger og fikset errors)
     const row = fakeDb.createTour({
       guideId: "demo-guide-1",
       imageUri,
@@ -57,7 +63,10 @@ export default function NewTourScreen() {
     Alert.alert("Publisert", "Turen er opprettet (dummy).", [
       { text: "OK", onPress: () => r.back() },
     ]);
+<<<<<<< HEAD
     // Evt: r.replace("/(guide)/(tabs)"); eller push til en "tour/[id]" side.
+=======
+>>>>>>> c3b7cf9 (la til bestilling, guide panel, meldinger og fikset errors)
   };
 
   return (

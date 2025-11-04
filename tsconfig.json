@@ -13,4 +13,8 @@
     "**/*.ts",
     "**/*.tsx"
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c3b7cf9 (la til bestilling, guide panel, meldinger og fikset errors)

@@ -4,8 +4,6 @@ import { useAuth } from '../../src/state/auth';
 import  LoginForm  from '../(auth)/LoginForm';
 
 export default function SignIn() {
-  const { signIn } = useAuth();
-
   return (
     <View style={{ flex: 1 }}>
       <LoginForm/>
