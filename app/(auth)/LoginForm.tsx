@@ -25,7 +25,7 @@ const LoginForm = () => {
                     router.replace('/(tourist)/');
                     break;
                 case 'guide':
-                    router.replace('/(guide)/tours');
+                    router.replace('/(guide)/');
                     break;
                 case 'admin':
                     router.replace('/(admin)/dashboard');
