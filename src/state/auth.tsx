@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import SignIn from "../../app/(auth)/sign-in"
-import { createContext, use, useCallback, useEffect, useState } from "react";
+import { createContext, useContext, useCallback, useEffect, useState } from "react";
 
 const ROLES = {
   ADMIN: "Admin",
@@ -27,10 +27,11 @@ type AuthContextType = {
   logout: () => Promise<void>;
 }
 
+
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoading: false,
-  login: async (email: string, password: string) => {},
+  login: async () => {},
   register: async () => {},
   logout: async () => {},
 });
@@ -88,13 +89,9 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register: async () => {}, logout}}>
+    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
-  );
-}
-
-export const useAuth = () => {
-    const context = use(AuthContext);
-    return context
-}
+    );
+  }
+export const useAuth = () => useContext(AuthContext);
