@@ -35,24 +35,14 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
 });
 
-const getUser = async (fail   = false) => {
-  return new Promise<{data : User | null}>((resolve, reject) => {
+
+const getUser = async (fail = false) =>
+  new Promise<{ data: User | null }>((resolve, reject) => {
     setTimeout(() => {
-      if (fail) {
-        reject("Failed to fetch user");
-      } else {
-        resolve({
-          data: {
-          id: "1",
-          displayName: "Test User",
-          email: "123",
-          role: ROLES.USER,
-        }
-        });
-      }
-    }, 1000);
+      if (fail) reject("Failed to fetch user");
+      else resolve({ data: null });
+    }, 400);
   });
-}
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
