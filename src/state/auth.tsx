@@ -19,13 +19,18 @@ type User = {
   role: Role;
 };
 
+
+
+
 type AuthContextType = {
   user: User | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string, role: Role) => Promise<void>;
+  register: (email: string, password: string, role: Role) => Promise<void>;
   logout: () => Promise<void>;
-}
+};
+
+
 
 
 const AuthContext = createContext<AuthContextType>({
