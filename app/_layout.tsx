@@ -2,17 +2,11 @@ import { Slot } from "expo-router";
 import { View } from "react-native";
 import { Stack } from 'expo-router';
 import AuthProvider, {useAuth} from '../src/state/auth';
+import React from "react";
+import { Text, Pressable } from "react-native";
+import { Link } from "expo-router";
 
-
-
-export function RootLayout() {
-  const {  } = useAuth();
-  return (
-    <View style={{ flex: 1 }}>
-      <Slot />
-    </View>
-
-export default function RootLayout() {
+export  function RootLayout() {
   return (
     <AuthProvider>
       <Slot />
@@ -25,4 +19,23 @@ export default function LayoutWithProviders() {
       <RootLayout></RootLayout>
     </AuthProvider>
   )
+}
+
+export default function Home() {
+  const { signOut } = useAuth();
+
+  return (
+    <View>
+      <View>
+        <Text>Home</Text>
+      </View>
+      <View>
+        <Pressable
+          onPress={() => signOut()}
+        >
+          <Text>Sign out</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
 }

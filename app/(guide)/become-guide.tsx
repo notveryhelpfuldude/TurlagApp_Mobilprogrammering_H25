@@ -8,18 +8,11 @@ export default function BecomeGuideScreen() {
 
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
-<<<<<<< HEAD
   const [languages, setLanguages] = useState(""); // "Norsk, Engelsk"
   const [themes, setThemes] = useState("");       // "Historie, Mat, Natur"
 
   const onSubmit = () => {
     // basic validering (alpha level)
-=======
-  const [languages, setLanguages] = useState(""); 
-  const [themes, setThemes] = useState("");       
-
-  const onSubmit = () => {
->>>>>>> c3b7cf9 (la til bestilling, guide panel, meldinger og fikset errors)
     if (!name.trim()) {
       Alert.alert("Mangler navn", "Skriv inn navnet ditt.");
       return;
@@ -36,11 +29,8 @@ export default function BecomeGuideScreen() {
     Alert.alert("Publisert", "Guide-profilen din er lagret (dummy).", [
       { text: "OK", onPress: () => r.back() },
     ]);
-<<<<<<< HEAD
     // Du kan også route til guide-tab: r.replace("/(guide)/(tabs)")
     // eller til 'ny tur': r.push("/(guide)/new-tour")
-=======
->>>>>>> c3b7cf9 (la til bestilling, guide panel, meldinger og fikset errors)
   };
 
   return (
