@@ -1,6 +1,10 @@
 import { Stack } from 'expo-router';
+import AuthProvider, {useAuth} from '../src/state/auth';
 
-export default function RootLayout() {
+
+
+export function RootLayout() {
+  const {  } = useAuth();
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
@@ -10,4 +14,11 @@ export default function RootLayout() {
       <Stack.Screen name="(admin)" />
     </Stack>
   );
+}
+export default function LayoutWithProviders() {
+  return (
+    <AuthProvider>
+      <RootLayout></RootLayout>
+    </AuthProvider>
+  )
 }
