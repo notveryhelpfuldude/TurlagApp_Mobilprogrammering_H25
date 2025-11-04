@@ -1,14 +1,33 @@
-import { Redirect } from 'expo-router';
-import { useAuth } from '../src/state/auth';
+import { View, Text, Pressable } from "react-native";
+import { Link } from "expo-router";
 
-export default function Index() {
-  const context = useAuth();
-  if (context.user == null) return <Redirect href="/(auth)/sign-in" />;
+export default function Home() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 16,
+      }}
+    >
+      <Text style={{ fontSize: 22, fontWeight: "700" }}>Velkommen 🎉</Text>
 
-  switch (context.user.role) {
-    case "Tourist":    return <Redirect href="/(tourist)/" />;
-    case "Guide":   return <Redirect href="/(guide)/tours" />;
-    case "Admin":   return <Redirect href="/(admin)/dashboard" />;
-    default:        return <Redirect href="/(auth)/sign-in" />;
-  }
+      {/* Link som åpner LoginForm-siden */}
+      <Link href="/(auth)/LoginForm" asChild>
+        <Pressable
+          style={{
+            backgroundColor: "#2563eb",
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            borderRadius: 8,
+          }}
+        >
+          <Text style={{ color: "white", fontWeight: "600" }}>
+            Gå til innlogging
+          </Text>
+        </Pressable>
+      </Link>
+    </View>
+  );
 }
