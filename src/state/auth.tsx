@@ -48,7 +48,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
-    const fetchUser = async () => {
+    (async () => {
       setIsLoading(true);
       try {
         const {data } = await getUser();
@@ -58,8 +58,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       } finally {
         setIsLoading(false);
       }
-    };
-    fetchUser();
+    })();
   }, []);
   
   const login = async (email: string, password: string) => {
