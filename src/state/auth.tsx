@@ -84,6 +84,16 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       setIsLoading(false);
     }
   };
+  const logout = async () => {
+    setIsLoading(true);
+    try {
+      setUser(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <AuthContext.Provider value={{ user, isLoading, login, register: async () => {}, logout: async () => {} }}>
