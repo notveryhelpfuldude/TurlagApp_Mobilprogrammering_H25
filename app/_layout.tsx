@@ -1,13 +1,20 @@
+import { Slot } from "expo-router";
+import { View } from "react-native";
 import { Stack } from 'expo-router';
+import AuthProvider, {useAuth} from '../src/state/auth';
+import { Children } from "react";
 
-export default function RootLayout() {
+export  function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="(auth)" />
-      <Stack.Screen name="(tourist)" />
-      <Stack.Screen name="(guide)" />
-      <Stack.Screen name="(admin)" />
-    </Stack>
+    <AuthProvider>
+      {Children.only(<Slot />)}
+    </AuthProvider>
   );
+}
+export default function LayoutWithProviders() {
+  return (
+    <AuthProvider>
+      <RootLayout></RootLayout>
+    </AuthProvider>
+  )
 }

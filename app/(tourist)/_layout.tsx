@@ -2,7 +2,7 @@ import { Tabs, Redirect } from 'expo-router';
 import { useAuth } from '../../src/state/auth';
 
 export default function TouristTabs() {
-  const { token, role } = useAuth();
+  
   //if (!token || role !== 'tourist') return <Redirect href="/(auth)/sign-in" />;
 
   return (

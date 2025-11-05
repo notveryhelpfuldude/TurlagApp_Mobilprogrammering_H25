@@ -2,7 +2,6 @@ import { Tabs, Redirect } from 'expo-router';
 import { useAuth } from '../../src/state/auth';
 
 export default function AdminTabs() {
-  const { token, role } = useAuth();
  // if (!token || role !== 'admin') return <Redirect href="/(auth)/sign-in" />;
 
   return (
