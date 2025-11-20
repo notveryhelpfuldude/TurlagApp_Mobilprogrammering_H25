@@ -3,7 +3,6 @@ import { GuideProfile, Tour } from "./types";
 let _guides: GuideProfile[] = [];
 let _tours: Tour[] = [];
 
-// Enkel id-generator (holder i alpha, bytt til uuid senere)
 const rid = () => String(Date.now()) + "-" + Math.floor(Math.random() * 1e6);
 
 export const fakeDb = {
