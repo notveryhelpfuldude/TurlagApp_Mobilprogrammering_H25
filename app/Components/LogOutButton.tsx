@@ -5,6 +5,11 @@ type LogoutButtonProps = {
 };
 
 export function LogOutButton({ onPress }: LogoutButtonProps) {
+    const handlePress = async () => {
+        if (onPress) {
+            await onPress();
+        }
+    };
     return (
         <TouchableOpacity
             onPress={onPress}
