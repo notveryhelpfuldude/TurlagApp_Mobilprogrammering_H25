@@ -15,7 +15,8 @@ export default function LogOutButton({ onPress }: LogoutButtonProps) {
         }
     };
     if (!onPress) {
-        return (<Pressable
+        return (
+        <Pressable
             style={{
                 backgroundColor: '#ef4444',
                 paddingVertical: 10,
@@ -29,7 +30,6 @@ export default function LogOutButton({ onPress }: LogoutButtonProps) {
         </Pressable>);
     }
     return (
-        <view style ={{ alignItems: 'center', justifyContent: 'center' }}>
             <Pressable
                 onPress={handlePress}
                 style={{
@@ -43,6 +43,5 @@ export default function LogOutButton({ onPress }: LogoutButtonProps) {
             >
                 <Text style={{ color: 'white', fontWeight: '600' }}>Logg ut</Text>
             </Pressable>
-        </view>
     );
 }
