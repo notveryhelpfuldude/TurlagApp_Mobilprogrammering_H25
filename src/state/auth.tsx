@@ -73,7 +73,6 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       const foundUser = users.find(
         (u) => u.email === email && u.password === password && u.role.toLowerCase() === role.toLowerCase()
       );
-      Alert.alert("Debug", `Looking for user with email: ${email}, password: ${password}, role: ${role}`);
       if (!foundUser) {
         throw new Error("Invalid credentials");
       }
