@@ -5,6 +5,7 @@ import LogOutButton from 'app/Components/LogOutButton';
 export default function AdminProfile() {
   return <View style={{ padding: 16, gap: 12 }}>
     <Text>Adminprofil</Text>
-    <LogOutButton>
+    <LogOutButton/>
   </View>;
 }
+
