@@ -1,13 +1,17 @@
 import { Pressable, Text } from 'react-native';
 
 type LogoutButtonProps = {
-    onPress: () => void;
+    onPress: () => Promise<void> | void;
 };
 
 export default function LogOutButton({ onPress }: LogoutButtonProps) {
     const handlePress = async () => {
         if (onPress) {
-            await onPress();
+            try {
+                await onPress();
+            } catch (error) {
+                console.error('Logout failed:', error);
+            }
         }
     };
     if (!onPress) {
