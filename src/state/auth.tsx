@@ -2,13 +2,13 @@ import { router } from "expo-router";
 import SignIn from "../../app/(auth)/sign-in"
 import { createContext, useContext, useCallback, useEffect, useState } from "react";
 
-const ROLES = {
+export const ROLES = {
   ADMIN: "Admin",
   GUIDE: "Guide",
   USER: "Tourist",
 } as const;
 
-type Role = typeof ROLES[keyof typeof ROLES];
+export type Role = typeof ROLES[keyof typeof ROLES];
 
 type User = {
   id: string;
@@ -18,8 +18,6 @@ type User = {
   password?: string;
   role: Role;
 };
-
-
 
 
 type AuthContextType = {
