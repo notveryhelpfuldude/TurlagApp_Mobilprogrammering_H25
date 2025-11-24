@@ -4,7 +4,7 @@ type LogoutButtonProps = {
     onPress: () => void;
 };
 
-export function LogOutButton({ onPress }: LogoutButtonProps) {
+export default function LogOutButton({ onPress }: LogoutButtonProps) {
     const handlePress = async () => {
         if (onPress) {
             await onPress();
