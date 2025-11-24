@@ -1,7 +1,7 @@
 import { Pressable, Text } from 'react-native';
 
 type LogoutButtonProps = {
-    onPress: () => Promise<void> | void;
+    onPress?: () => Promise<void> | void;
 };
 
 export default function LogOutButton({ onPress }: LogoutButtonProps) {

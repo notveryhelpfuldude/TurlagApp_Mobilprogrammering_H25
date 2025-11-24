@@ -14,6 +14,7 @@ export default function GuideHome() {
       }}
       >
       <Text style={{ fontSize: 22, fontWeight: "700" }}>Velkommen Guide 🎉</Text>
+      <LogOutButton/>
       </View>
   );
 }
