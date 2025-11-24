@@ -11,6 +11,7 @@ export type Tour = {
   spotsLeft: number;
   date: string; // ISO string eller bare "12.01.2026"
   imageUrl?: string;
+  nextStart?: string;
 };
 
 export const TOURS: Tour[] = [
