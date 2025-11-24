@@ -1,5 +1,6 @@
 {
   "expo": {
+    "Scheme": "turlagapp",
     "extra": {
       "eas": {
         "projectId": "5641acf4-9571-40c6-a321-2715bd922e12"
