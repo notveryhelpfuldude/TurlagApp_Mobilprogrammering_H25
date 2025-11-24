@@ -29,7 +29,7 @@ export default function GuideTabs() {
         tabBarStyle: {
           backgroundColor: theme === "dark" ? "#0B1220" : "#ffffff",
           borderTopColor: "#E5E7EB",
-          height: 60,
+          height: 100,
           paddingTop: 6,
         },
         tabBarLabelStyle: { fontSize: 12, fontWeight: "600" },
