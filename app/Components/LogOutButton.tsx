@@ -12,7 +12,6 @@ export default function LogOutButton({ onPress }: LogoutButtonProps) {
     if (onPress) {
         await onPress();
     } else {
-        alert("Logging out");
         try {
             await logout();
         } catch (error) {
