@@ -3,15 +3,13 @@ import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { router } from 'expo-router';
-import { useAuth } from '../../src/state/auth'; 
-
-type Role = 'tourist' | 'guide' | 'admin';
+import { useAuth, ROLES, type Role } from '../../src/state/auth'; 
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('turist'); // 'turist' | 'guide' | 'admin'
-    const { login, isLoading, user } = useAuth();
+    const [role, setRole] = useState<Role>(ROLES.USER);
+    const { login, isLoading } = useAuth();
 
     const handleLogin = async () => {
          if (!email || !password) {
@@ -19,15 +17,15 @@ const LoginForm = () => {
             return;
         }
         try {
-            await login(email, password, "Guide");
+            await login(email, password, role);
             switch (role) {
-                case 'tourist':
+                case ROLES.USER:
                     router.replace('/(tourist)/');
                     break;
-                case 'guide':
+                case ROLES.GUIDE:
                     router.replace('/(guide)/');
                     break;
-                case 'admin':
+                case ROLES.ADMIN:
                     router.replace('/(admin)/dashboard');
                     break;
                 default:
@@ -64,28 +62,28 @@ const LoginForm = () => {
       <Text style={[styles.label, { marginTop: 8 }]}>Velg rolle</Text>
       <View style={styles.roleGroup}>
         <Checkbox
-          value={role === 'tourist'}
-          onValueChange={() => setRole('tourist')}
+          value={role === ROLES.USER}
+          onValueChange={() => setRole(ROLES.USER)}
           style={styles.checkbox}
         />
         <Text style={styles.roleLabel}>Turist</Text>
 
         <Checkbox
-          value={role === 'guide'}
-          onValueChange={() => setRole('guide')}
+          value={role === ROLES.GUIDE}
+          onValueChange={() => setRole(ROLES.GUIDE)}
           style={styles.checkbox}
         />
         <Text style={styles.roleLabel}>Guide</Text>
 
         <Checkbox
-          value={role === 'admin'}
-          onValueChange={() => setRole('admin')}
+          value={role === ROLES.ADMIN}
+          onValueChange={() => setRole(ROLES.ADMIN)}
           style={styles.checkbox}
         />
         <Text style={styles.roleLabel}>Admin</Text>
       </View>
 
-      <Button title="Logg inn" onPress={handleLogin} />
+      <Button title={isLoading ? "Logger inn..." : "Logg inn"} onPress={handleLogin} disabled={isLoading} />
     </View>
   );
 };
