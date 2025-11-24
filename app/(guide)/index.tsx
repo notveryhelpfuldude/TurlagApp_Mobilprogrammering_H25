@@ -1,5 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
+import { useAuth } from "../../src/state/auth";
+import LogOutButton from "app/Components/LogOutButton";
 
 export default function GuideHome() {
   return (
