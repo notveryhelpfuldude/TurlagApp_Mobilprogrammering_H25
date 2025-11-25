@@ -1,4 +1,4 @@
-import { Client, TablesDB, Account } from "react-native-appwrite";
+import { Client, TablesDB, Account, Locale } from "react-native-appwrite";
 import { APPWRITE_KEYS } from "Appwrite/constants/keys";
 
 const endpoint = process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT;
@@ -16,3 +16,14 @@ export const client = new Client()
 
 export const account = new Account(client);
 export const database = new TablesDB(client);
+
+
+export const locale = new Locale(client)
+export async function testConnection() {
+  try {
+    const res = await locale.get();
+    console.log("✅ Connection OK:", res);
+  } catch (err) {
+    console.error("❌ Connection FAILED:", err);
+  }
+}

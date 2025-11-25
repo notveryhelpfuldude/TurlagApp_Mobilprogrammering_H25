@@ -1,2 +1,2 @@
-import { AccountAppwrite } from ".";
+import { account } from ".";
 import { ID } from "react-native-appwrite";
