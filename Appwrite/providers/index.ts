@@ -5,6 +5,6 @@ export const client = new Client();
 client
     .setEndpoint(APPWRITE_KEYS.API_URL)
     .setProject(APPWRITE_KEYS.PROJECT_ID)
-    .setPlatform('com.example.idea-tracker');
+    .setPlatform(APPWRITE_KEYS.PLATFORM_ID);
 export const account = new Account(client);
 export const database = new TablesDB(client);
