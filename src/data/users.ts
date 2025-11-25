@@ -1,20 +1,27 @@
 import { UserType } from "../types/usertype";
 
-const adminUser: UserType = {
+export const users: UserType[] = [
+  {
     id: '1',
     name: 'Admin User',
-    email: 'admintest',
+    email: 'admin',
     role: 'admin',
-};
-const guideUser: UserType = {
+    password: '123',
+  },
+  {
     id: '2',
     name: 'Guide User',
-    email: 'guidetest',
+    email: 'guide',
     role: 'guide',
-};
-const touristUser: UserType = {
+    password: '123',
+  },
+  {
     id: '3',
     name: 'Tourist User',
-    email: 'touristtest',
+    email: 'tourist',
     role: 'tourist',
-};
+    password: '123',
+  },
+];
+
+export default users;

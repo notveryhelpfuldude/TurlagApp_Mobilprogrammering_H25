@@ -52,6 +52,7 @@ export default function NewTourScreen() {
       themes: splitCsv(themes),
       priceNOK,
       seats: seatsNum,
+      nextStart: new Date().toISOString(),
     });
 
     Alert.alert("Publisert", "Turen er opprettet (dummy).", [

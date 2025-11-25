@@ -1,14 +1,16 @@
 import { router } from "expo-router";
 import SignIn from "../../app/(auth)/sign-in"
 import { createContext, useContext, useCallback, useEffect, useState } from "react";
+import users from "src/data/users";
+import { Alert } from "react-native";
 
-const ROLES = {
-  ADMIN: "Admin",
-  GUIDE: "Guide",
-  USER: "Tourist",
+export const ROLES = {
+  ADMIN: "admin",
+  GUIDE: "guide",
+  USER: "tourist",
 } as const;
 
-type Role = typeof ROLES[keyof typeof ROLES];
+export type Role = typeof ROLES[keyof typeof ROLES];
 
 type User = {
   id: string;
@@ -18,8 +20,6 @@ type User = {
   password?: string;
   role: Role;
 };
-
-
 
 
 type AuthContextType = {
@@ -70,14 +70,20 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const login = async (email: string, password: string, role: Role) => {
     setIsLoading(true);
     try {
-      await new Promise((r) => setTimeout(r, 250));
+      const foundUser = users.find(
+        (u) => u.email === email && u.password === password && u.role.toLowerCase() === role.toLowerCase()
+      );
+      if (!foundUser) {
+        throw new Error("Invalid credentials");
+      }
       setUser({
-        id: "1",
-        displayName: "Test User",
-        email,
-        role, 
-        password,
+        id: foundUser.id,
+        displayName: foundUser.name,
+        email: foundUser.email,
+        role: foundUser.role as Role,
       });
+    } catch (error) {
+      throw error;
     } finally {
       setIsLoading(false);
     }
