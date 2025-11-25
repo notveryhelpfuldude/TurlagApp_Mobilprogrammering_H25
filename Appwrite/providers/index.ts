@@ -1,8 +1,10 @@
-import { Client, Account } from "react-native-appwrite";
+import { Client, TablesDB, Account } from "react-native-appwrite";
 import { APPWRITE_KEYS } from "Appwrite/constants/keys";
 
-export const ClientAppwrite = new Client();
-ClientAppwrite
-    .setEndpoint(APPWRITE_KEYS.API_URL as string)
-    .setProject(APPWRITE_KEYS.PROJECT_ID as string);
-export const AccountAppwrite = new Account(ClientAppwrite);
+export const client = new Client();
+client
+    .setEndpoint(APPWRITE_KEYS.API_URL)
+    .setProject(APPWRITE_KEYS.PROJECT_ID)
+    .setPlatform('com.example.idea-tracker');
+export const account = new Account(client);
+export const database = new TablesDB(client);
