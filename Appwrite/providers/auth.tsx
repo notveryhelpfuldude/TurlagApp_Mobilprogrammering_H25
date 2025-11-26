@@ -103,11 +103,17 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   
   const register = async (email: string, password: string, role: Role) => {
     setIsLoading(true);
+    try {
       await account.create({
-      userId: ID.unique(),
-      email,
-      password
-    });
+        userId: ID.unique(),
+        email, 
+        password, 
+      });
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }   
   };
 
   return (
