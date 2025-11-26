@@ -85,6 +85,7 @@ const LoginForm = () => {
       </View>
 
       <Button title={isLoading ? "Logger inn..." : "Logg inn"} onPress={handleLogin} disabled={isLoading} />
+      <Button title="Gå til registrering" onPress={() => router.push('/(auth)/sign-up')} />
     </View>
   );
 };
