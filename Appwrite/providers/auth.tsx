@@ -1,8 +1,5 @@
-import { router } from "expo-router";
-import SignIn from "../../app/(auth)/sign-in"
 import { createContext, useContext, useCallback, useEffect, useState } from "react";
 import users from "src/data/users";
-import { Alert } from "react-native";
 import { account } from "Appwrite/providers";
 import { ID } from "react-native-appwrite";
 
