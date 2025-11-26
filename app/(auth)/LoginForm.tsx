@@ -9,7 +9,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState<Role>(ROLES.USER);
-    const { login, register, isLoading } = useAuth();
+    const { login, isLoading } = useAuth();
 
     const handleLogin = async () => {
          if (!email || !password) {
@@ -36,13 +36,6 @@ const LoginForm = () => {
         }
     };
 
-    const handleRegister = async () => {
-        try {
-          register("admin@admin.com", "12345678", ROLES.ADMIN);
-        } catch (err) {
-          Alert.alert('Feil', 'Registrering feilet.');
-        }
-    };
 
   return (
     <View style={styles.container}>
@@ -92,7 +85,6 @@ const LoginForm = () => {
       </View>
 
       <Button title={isLoading ? "Logger inn..." : "Logg inn"} onPress={handleLogin} disabled={isLoading} />
-      <Button title="Registrer (Admin)" onPress={handleRegister} />
     </View>
   );
 };
