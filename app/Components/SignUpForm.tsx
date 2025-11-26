@@ -14,22 +14,22 @@ export default function SignUpForm() {
 
 
     const HandleSignUp = () => {
-        const register = async (email: string, password: string, role: Role) => {
-            if (!email || !password) {
-                Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
-                return;
-            }
-            if (password.length < 8) {
-                Alert.alert('Feil', 'Passordet må være minst 8 tegn langt.');
-                return;
-            }
-            try {
-                await register(email, password, role);
+        if (!email || !password) {
+            Alert.alert('Feil', 'Vennligst skriv inn både e-post og passord.');
+            return;
+        }
+        if (password.length < 8) {
+            Alert.alert('Feil', 'Passord må være minst 8 tegn langt.');
+            return;
+        }
+        register(email, password, role)
+            .then(() => {
+                Alert.alert('Suksess', 'Registrering vellykket! Du kan nå logge inn.');
                 router.replace('/(auth)/sign-in');
-            } catch (err) {
-                Alert.alert('Feil', 'Registrering feilet.');
-            }
-        };
+            })
+            .catch(() => {
+                Alert.alert('Feil', 'Registrering feilet. Vennligst prøv igjen.');
+            });
     };
 
     return (
