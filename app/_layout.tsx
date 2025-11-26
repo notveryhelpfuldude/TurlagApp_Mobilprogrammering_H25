@@ -1,7 +1,7 @@
 import { Slot } from "expo-router";
 import { View } from "react-native";
 import { Stack } from 'expo-router';
-import AuthProvider, {useAuth} from '../src/state/auth';
+import AuthProvider, {useAuth} from '../Appwrite/providers/auth';
 import { Children, useEffect } from "react";
 import { account, testConnection } from "Appwrite/providers";
 
@@ -10,6 +10,7 @@ export  function RootLayout() {
     (async () => {
       try {
         testConnection();
+
         
         console.log('Appwrite Success!');
       } catch (e) {

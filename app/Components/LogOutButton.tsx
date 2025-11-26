@@ -1,5 +1,5 @@
 import { Pressable, Text } from 'react-native';
-import { useAuth } from '../../src/state/auth';
+import { useAuth } from '../../Appwrite/providers/auth';
 import { router } from 'expo-router';
 
 type LogoutButtonProps = {

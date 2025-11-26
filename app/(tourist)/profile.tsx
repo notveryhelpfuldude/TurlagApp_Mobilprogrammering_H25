@@ -1,5 +1,5 @@
 import { View, Text, Button } from 'react-native';
-import { useAuth } from '../../src/state/auth';
+import { useAuth } from '../../Appwrite/providers/auth';
 import { router } from 'expo-router';
 import LogOutButton from 'app/components/LogOutButton';
 

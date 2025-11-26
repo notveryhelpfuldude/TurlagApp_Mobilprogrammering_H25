@@ -1,5 +1,5 @@
 import { Tabs, Redirect } from 'expo-router';
-import { useAuth } from '../../src/state/auth';
+import { useAuth } from '../../Appwrite/providers/auth';
 
 export default function TouristTabs() {
   
