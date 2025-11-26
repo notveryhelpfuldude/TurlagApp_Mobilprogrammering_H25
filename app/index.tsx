@@ -13,7 +13,6 @@ export default function Home() {
     >
       <Text style={{ fontSize: 22, fontWeight: "700" }}>Velkommen 🎉</Text>
 
-      {/* Link som åpner LoginForm-siden */}
       <Link href="/(auth)/sign-in" asChild>
         <Pressable
           style={{

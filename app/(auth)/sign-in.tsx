@@ -1,7 +1,7 @@
 import { View, Text, Button } from 'react-native';
 import { router } from 'expo-router';
 import { useAuth } from '../../src/state/auth';
-import  LoginForm  from '../Components/LoginForm';
+import  LoginForm  from '../components/LoginForm';
 
 export default function SignIn() {
   return (
