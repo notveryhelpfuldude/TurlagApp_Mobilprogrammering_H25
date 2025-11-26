@@ -3,6 +3,8 @@ import SignIn from "../../app/(auth)/sign-in"
 import { createContext, useContext, useCallback, useEffect, useState } from "react";
 import users from "src/data/users";
 import { Alert } from "react-native";
+import { account } from "Appwrite/providers";
+import { ID } from "react-native-appwrite";
 
 export const ROLES = {
   ADMIN: "admin",
@@ -100,7 +102,12 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   };
   
   const register = async (email: string, password: string, role: Role) => {
-    return login(email, password, role);
+    setIsLoading(true);
+      await account.create({
+      userId: ID.unique(),
+      email,
+      password
+    });
   };
 
   return (
