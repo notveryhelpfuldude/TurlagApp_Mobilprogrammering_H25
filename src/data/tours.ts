@@ -1,5 +1,5 @@
 export type Tour = {
-  id: string;
+  $id: string;
   title: string;
   location: string;
   description: string;
@@ -14,6 +14,7 @@ export type Tour = {
   nextStart?: string;
 };
 
+/*
 export const TOURS: Tour[] = [
   {
     id: '1',
@@ -58,3 +59,4 @@ export const TOURS: Tour[] = [
     imageUrl: 'https://picsum.photos/600/400?random=3',
   },
 ];
+*/

@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { View, Text, FlatList, SafeAreaView } from 'react-native';
-import { TOURS } from '../../src/data/tours';
+//import { TOURS } from '../../src/data/tours';
 import { TourCard } from '../components/TourCard';
 import TourList from '../components/lists/tourlist';
 

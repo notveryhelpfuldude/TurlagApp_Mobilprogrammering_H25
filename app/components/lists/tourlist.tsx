@@ -38,7 +38,7 @@ export default function TourList() {
     return (
     <FlatList
       data={tours}
-      keyExtractor={(item) => item.id ?? item.$id ?? JSON.stringify(item)}
+      keyExtractor={(item) => item.$id ?? JSON.stringify(item)}
       contentContainerStyle={{ paddingTop: 10, paddingBottom: 40, paddingHorizontal: 16 }}
       renderItem={({ item }) => (
         <TourCard
