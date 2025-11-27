@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { router } from 'expo-router';
-import { useAuth, ROLES, type Role } from '../../Appwrite/providers/auth'; 
+import { useAuth, ROLES, type Role } from '../../../Appwrite/providers/auth'; 
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -85,6 +85,7 @@ const LoginForm = () => {
       </View>
 
       <Button title={isLoading ? "Logger inn..." : "Logg inn"} onPress={handleLogin} disabled={isLoading} />
+      <Text style={{ textAlign: 'center', margin: 16 }}>Ny bruker?</Text>
       <Button title="Gå til registrering" onPress={() => router.push('/(auth)/sign-up')} />
     </View>
   );
