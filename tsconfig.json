@@ -6,7 +6,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "types": [
-      "expo-router"
+      "expo-router",
+      "node"
     ]
   },
   "include": [

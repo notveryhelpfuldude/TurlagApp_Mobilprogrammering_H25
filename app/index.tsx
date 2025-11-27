@@ -1,5 +1,6 @@
 import { View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
+import { registerRootComponent } from 'expo';
 
 export default function Home() {
   return (
