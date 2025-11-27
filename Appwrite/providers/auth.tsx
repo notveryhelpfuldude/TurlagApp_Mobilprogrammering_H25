@@ -89,9 +89,10 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const logout = async () => {
     setIsLoading(true);
     try {
+      await account.deleteSession({ sessionId: "current" });
       setUser(null);
     } catch (error) {
-      console.error("Logout failed:", error);
+      throw error;
     } finally {
       setIsLoading(false);
     }
