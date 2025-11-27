@@ -5,16 +5,17 @@ import AuthProvider, {useAuth} from '../Appwrite/providers/auth';
 import { Children, useEffect } from "react";
 import { account, testConnection } from "Appwrite/providers";
 import "./tailwind.css"
+import { promise } from "../Appwrite/providers/tourprovider";
+
 
 export  function RootLayout() {
     useEffect(() => {
     (async () => {
-      try {
-        testConnection()
-        console.log('Appwrite Success!');
-      } catch (e) {
-        console.warn('Appwrite Failed!', e);
-      }
+      promise.then(function (response) {
+    console.log(response);
+}, function (error) {
+    console.log(error);
+});
     })();
   }, []);
   return (

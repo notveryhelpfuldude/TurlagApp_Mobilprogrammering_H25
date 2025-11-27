@@ -1,4 +1,4 @@
-import { Client, TablesDB, Account, Locale } from "react-native-appwrite";
+import { Client, TablesDB, Account, Locale, Query } from "react-native-appwrite";
 import { APPWRITE_KEYS } from "Appwrite/constants/keys";
 
 const endpoint = process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT;

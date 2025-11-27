@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import { View, Text, FlatList, SafeAreaView } from 'react-native';
 import { TOURS } from '../../src/data/tours';
-import { TourCard } from '../componentsTemp/TourCard';
+import { TourCard } from '../components/TourCard';
 
 export default function Home() {
   return (
