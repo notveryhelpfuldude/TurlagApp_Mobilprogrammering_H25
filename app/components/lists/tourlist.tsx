@@ -10,9 +10,10 @@ export default function TourList() {
     const [error, setError] = useState<string | null>(null);
     useEffect(() => {
         let isMounted = true;
-        (async () => {
-            setLoading(true);
+        (async () => {   
             try {
+                setLoading(true);
+                setError(null);
                 const fetchedTours = await listAllTours();
                 if (!isMounted) return;
                 setTours(fetchedTours);
@@ -21,7 +22,7 @@ export default function TourList() {
                 if (!isMounted) return;
                 setError("Failed to load tours.");
             } finally {
-                if (!isMounted) setLoading(false);
+                if (isMounted) setLoading(false);
             }
         })();
         return () => {
