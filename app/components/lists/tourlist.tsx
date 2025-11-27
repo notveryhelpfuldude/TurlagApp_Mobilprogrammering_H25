@@ -16,12 +16,12 @@ export default function TourList() {
                 const fetchedTours = await listAllTours();
                 if (!isMounted) return;
                 setTours(fetchedTours);
+                console.log("Fetched tours:", fetchedTours);
             } catch (err) {
                 if (!isMounted) return;
                 setError("Failed to load tours.");
             } finally {
-                if (!isMounted) return;
-                setLoading(false);
+                if (!isMounted) setLoading(false);
             }
         })();
         return () => {
@@ -32,5 +32,22 @@ export default function TourList() {
     if (loading) {
         return <Text>Loading tours...</Text>;
     }
+    if (error) {
+        return <Text>{error}</Text>;
+    }
+    return (
+    <FlatList
+      data={tours}
+      keyExtractor={(item) => item.id ?? item.$id ?? JSON.stringify(item)}
+      contentContainerStyle={{ paddingTop: 10, paddingBottom: 40, paddingHorizontal: 16 }}
+      renderItem={({ item }) => (
+        <TourCard
+          tour={item as Tour}
+          onPress={() => {
+          }}
+        />
+      )}
+    />
+    );
 
 }
