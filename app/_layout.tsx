@@ -14,10 +14,3 @@ export  function RootLayout() {
     </AuthProvider>
   );
 }
-export default function LayoutWithProviders() {
-  return (
-    <AuthProvider>
-      <RootLayout></RootLayout>
-    </AuthProvider>
-  )
-}
