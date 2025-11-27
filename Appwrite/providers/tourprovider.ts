@@ -4,13 +4,19 @@ import { client } from "./index";
 import { Tour } from "@/src/data/tours";
 
 const database = new TablesDB(client);
-const dataBaseId = APPWRITE_KEYS.DATABASE_ID || "";
+const databaseId = APPWRITE_KEYS.DATABASE_ID || "";
 const tourTableId = APPWRITE_KEYS.TOURS_TABLE_ID || "";
 
+export async function listAllTours() {
+  if (!databaseId || !tourTableId) {
+    throw new Error("Missing EXPO_PUBLIC_DATABASE_ID or EXPO_PUBLIC_TOURS_TABLE_ID");
+  }
 
+  const res = await database.listRows({
+    databaseId,
+    tableId: tourTableId,
+    queries: [],
+  });
 
-export const listAllTours = database.listRows({
-    databaseId: "2",
-    tableId: "2",
-    queries: []
-});
+  return (res as any)?.rows ?? [];
+}
