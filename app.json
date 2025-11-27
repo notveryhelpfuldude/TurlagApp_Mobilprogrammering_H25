@@ -1,5 +1,8 @@
 {
   "expo": {
+    "Web": {
+      "bundler": "metro"
+    },
     "Scheme": "turlagapp",
     "extra": {
       "eas": {

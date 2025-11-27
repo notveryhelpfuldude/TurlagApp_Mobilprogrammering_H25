@@ -4,14 +4,13 @@ import { Stack } from 'expo-router';
 import AuthProvider, {useAuth} from '../Appwrite/providers/auth';
 import { Children, useEffect } from "react";
 import { account, testConnection } from "Appwrite/providers";
+import "./tailwind.css"
 
 export  function RootLayout() {
     useEffect(() => {
     (async () => {
       try {
-        testConnection();
-
-        
+        testConnection()
         console.log('Appwrite Success!');
       } catch (e) {
         console.warn('Appwrite Failed!', e);
