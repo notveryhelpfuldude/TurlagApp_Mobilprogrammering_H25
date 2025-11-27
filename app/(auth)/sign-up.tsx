@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import SignUpForm from '../components/forms/SignUpForm';
+import SignUpForm from '../componentsTemp/forms/SignUpForm';
 
 export default function SignUp() {
     return (

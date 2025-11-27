@@ -1,5 +1,5 @@
 import { View, Text, Button } from 'react-native';
-import  LoginForm  from '../components/forms/LoginForm';
+import  LoginForm  from '../componentsTemp/forms/LoginForm';
 
 export default function SignIn() {
   return (
