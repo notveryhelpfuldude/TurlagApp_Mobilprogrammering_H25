@@ -69,17 +69,16 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const login = async (email: string, password: string, role: Role) => {
     setIsLoading(true);
     try {
-      const foundUser = users.find(
-        (u) => u.email === email && u.password === password && u.role.toLowerCase() === role.toLowerCase()
-      );
-      if (!foundUser) {
-        throw new Error("Invalid credentials");
-      }
+      await account.createEmailPasswordSession({
+        email,
+        password,
+      });
+      const userData = await account.get();
       setUser({
-        id: foundUser.id,
-        displayName: foundUser.name,
-        email: foundUser.email,
-        role: foundUser.role as Role,
+        id: userData.$id,
+        displayName: userData.name || "",
+        email: userData.email,
+        role: role,
       });
     } catch (error) {
       throw error;
