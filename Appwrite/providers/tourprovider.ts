@@ -4,13 +4,13 @@ import { client } from "./index";
 import { Tour } from "@/src/data/tours";
 
 const database = new TablesDB(client);
-const databaseid = APPWRITE_KEYS.DATABASE_ID || "";
-const tourtableid = APPWRITE_KEYS.TOURS_TABLE_ID || "";
+const dataBaseId = APPWRITE_KEYS.DATABASE_ID || "";
+const tourTableId = APPWRITE_KEYS.TOURS_TABLE_ID || "";
 
 
 
 export const listAllTours = database.listRows({
-    databaseId: databaseid,
-    tableId: tourtableid,
+    databaseId: "2",
+    tableId: "2",
     queries: []
 });
