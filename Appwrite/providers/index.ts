@@ -15,7 +15,7 @@ export const client = new Client()
   .setPlatform(platformId);
 
 export const account = new Account(client);
-export const database = new TablesDB(client);
+
 
 
 export const locale = new Locale(client)

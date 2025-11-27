@@ -19,13 +19,13 @@ export type Tour = {
 };
 
 const database = new TablesDB(client);
+const databaseid = APPWRITE_KEYS.DATABASE_ID || "";
+const tourtableid = APPWRITE_KEYS.TOURS_TABLE_ID || "";
+
 
 export const promise = database.listRows({
-    databaseId: "692880520033178ae184",
-    tableId: "tours",
+    databaseId: databaseid,
+    tableId: tourtableid,
     queries: [
-        Query.equal('difficulty', 'lett'),
-        Query.limit(10)
-
     ]
 });
