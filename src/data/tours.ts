@@ -1,19 +1,18 @@
-export type Tour = {
-  $id: string;
-  title: string;
-  location: string;
-  description: string;
-  distanceKm: number;
-  durationHours: number;
-  difficulty: 'lett' | 'middels' | 'krevende';
-  priceNok: number;
-  maxParticipants: number;
-  spotsLeft: number;
-  date: string; // ISO string eller bare "12.01.2026"
-  imageUrl?: string;
-  nextStart?: string;
-};
+import type { Models } from 'react-native-appwrite';
 
+export interface Tour extends Models.Row {
+  title: string;
+  startDate: string;
+  endDate: string; 
+  priceNOK: number;
+  maxParticipants: number;
+  location: string;
+  tourDescription: string | null;
+  distanceKM: number | null;
+  difficulty: string | null;
+  spotsLeft: number | null;
+  imageURL: string | null;
+}
 /*
 export const TOURS: Tour[] = [
   {

@@ -24,9 +24,9 @@ export function TourCard({ tour, onPress, onBookPress }: Props) {
       }}
       activeOpacity={0.8}
     >
-      {tour.imageUrl && (
+      {tour.imageURL && (
         <Image
-          source={{ uri: tour.imageUrl }}
+          source={{ uri: tour.imageURL }}
           style={{ width: '100%', height: 160 }}
         />
       )}
@@ -36,15 +36,15 @@ export function TourCard({ tour, onPress, onBookPress }: Props) {
           {tour.title}
         </Text>
         <Text style={{ fontSize: 13, color: '#555', marginBottom: 6 }}>
-          {tour.location} • {tour.distanceKm} km • {tour.durationHours} t
+          {tour.location} • {tour.distanceKM} km • {tour.endDate} t
         </Text>
 
         <View style={{ flexDirection: 'row', marginBottom: 8 }}>
-          <Tag label={tour.difficulty.toUpperCase()} />
-          {tour.priceNok === 0 ? (
+          {tour.difficulty && <Tag label={tour.difficulty.toUpperCase()} />}
+          {tour.priceNOK === 0 ? (
             <Tag label="GRATIS" />
           ) : (
-            <Tag label={`${tour.priceNok} kr`} />
+            <Tag label={`${tour.priceNOK} kr`} />
           )}
         </View>
 
@@ -52,7 +52,7 @@ export function TourCard({ tour, onPress, onBookPress }: Props) {
           numberOfLines={2}
           style={{ fontSize: 13, color: '#444', marginBottom: 10 }}
         >
-          {tour.description}
+          {tour.tourDescription}
         </Text>
 
         <View
