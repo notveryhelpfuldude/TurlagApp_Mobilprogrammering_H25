@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import type { Tour } from '../data/tours';
+import type { Tour } from '@/src/data/tours';
 import { Tag } from './Tag';
 import { PrimaryButton } from './PrimaryButton';
 
@@ -8,6 +8,8 @@ type Props = {
   onPress?: () => void;       // åpne detaljer
   onBookPress?: () => void;   // melde seg på
 };
+
+
 
 export function TourCard({ tour, onPress, onBookPress }: Props) {
   return (
