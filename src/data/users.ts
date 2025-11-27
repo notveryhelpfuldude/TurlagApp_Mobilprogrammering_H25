@@ -1,5 +1,8 @@
 import { UserType } from "../types/usertype";
 
+//Gammel hardkodet brukerdata for testing
+//Brukes ikke i produksjon
+
 export const users: UserType[] = [
   {
     id: '1',
