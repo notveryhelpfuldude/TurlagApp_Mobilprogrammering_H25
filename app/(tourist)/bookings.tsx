@@ -1,5 +1,4 @@
-// app/(tourist)/bookings.tsx
-import React from "react";
+
 import {
   View,
   Text,

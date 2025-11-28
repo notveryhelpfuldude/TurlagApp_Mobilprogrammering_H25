@@ -1,9 +1,6 @@
 import { Slot } from "expo-router";
-import { View } from "react-native";
-import { Stack } from 'expo-router';
 import AuthProvider, {useAuth} from '../Appwrite/providers/auth';
-import { Children, useEffect } from "react";
-import { account, testConnection } from "Appwrite/providers";
+import { useEffect } from "react";
 import "./tailwind.css";
 import { router } from "expo-router";
 import { WishlistProvider } from "@/src/context/WishlistContext";

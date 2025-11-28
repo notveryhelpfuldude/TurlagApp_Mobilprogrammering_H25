@@ -1,4 +1,4 @@
-// app/(tourist)/checkout/index.tsx
+
 import React, { useState } from "react";
 import {
   View,
@@ -31,7 +31,7 @@ export default function CheckoutScreen() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");   // 👈 NYTT
+  const [phoneNumber, setPhoneNumber] = useState("");  
   const [participants, setParticipants] = useState("1");
   const [status, setStatus] = useState<PaymentStatus>("idle");
 

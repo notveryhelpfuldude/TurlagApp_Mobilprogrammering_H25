@@ -1,5 +1,3 @@
-// app/(tourist)/wishlist.tsx
-import React from "react";
 import {
   View,
   Text,

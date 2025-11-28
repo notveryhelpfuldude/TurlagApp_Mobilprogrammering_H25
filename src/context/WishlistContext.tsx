@@ -1,4 +1,3 @@
-// src/context/WishlistContext.tsx
 import React, {
   createContext,
   useContext,

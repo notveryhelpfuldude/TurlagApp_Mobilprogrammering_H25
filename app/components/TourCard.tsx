@@ -1,5 +1,3 @@
-// app/components/TourCard.tsx
-import React from "react";
 import {
   View,
   Text,
@@ -61,11 +59,7 @@ export function TourCard({ tour, onPress, onBookPress }: Props) {
               title="Legg til ønskeliste"
               onPress={handleAddToWishlist}
             />
-            <View style={{ width: 8 }} />
-            <PrimaryButton
-              title="Se mer / meld på"
-              onPress={handleMainPress}
-            />
+            
           </View>
         </View>
       </View>

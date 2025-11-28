@@ -1,5 +1,4 @@
 import { createContext, useContext, useCallback, useEffect, useState } from "react";
-import users from "src/data/users";
 import { account } from "Appwrite/providers";
 import { ID } from "react-native-appwrite";
 import { Alert } from "react-native";
