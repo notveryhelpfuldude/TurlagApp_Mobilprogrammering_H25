@@ -8,10 +8,13 @@ export default function TouristTabs() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen name="index"    options={{ title: 'Hjem' }} />
-      <Tabs.Screen name="search"   options={{ title: 'Søk' }} />
       <Tabs.Screen name="wishlist" options={{ title: 'Ønsker' }} />
       <Tabs.Screen name="bookings" options={{ title: 'Bestill.' }} />
       <Tabs.Screen name="profile"  options={{ title: 'Profil' }} />
+      <Tabs.Screen name="activity/[id]" options={{ href: null }} />
+      <Tabs.Screen name="checkout/index" options={{ href: null }}/>
+      <Tabs.Screen name="review/[bookingId]" options={{ href: null }}/>
+      <Tabs.Screen name="ticket/[bookingId]" options={{ href: null }}/>
     </Tabs>
   );
 }
