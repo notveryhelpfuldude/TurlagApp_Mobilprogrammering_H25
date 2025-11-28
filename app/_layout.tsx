@@ -6,14 +6,22 @@ import { Children, useEffect } from "react";
 import { account, testConnection } from "Appwrite/providers";
 import "./tailwind.css";
 import { router } from "expo-router";
+import { WishlistProvider } from "@/src/context/WishlistContext";
 
 
 export default function RootLayout() {
   
   return (
+    // <AuthProvider>
+      
+    //   <AuthGateway />
+      
+    // </AuthProvider>
     <AuthProvider>
-      <AuthGateway />
-    </AuthProvider>
+  <WishlistProvider>
+    <AuthGateway />
+  </WishlistProvider>
+</AuthProvider>
   );
 }
 function AuthGateway() {
