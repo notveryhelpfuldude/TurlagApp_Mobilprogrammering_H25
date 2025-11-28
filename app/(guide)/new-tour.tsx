@@ -42,7 +42,8 @@ export default function NewTourScreen() {
       return;
     }
 
-    // I alpha antar vi at "innlogget guide" har id "demo-guide-1".
+    // Gammel backend løsning før Appwrite
+    /*
     const row = fakeDb.createTour({
       guideId: "demo-guide-1",
       imageUri,
@@ -54,6 +55,7 @@ export default function NewTourScreen() {
       seats: seatsNum,
       nextStart: new Date().toISOString(),
     });
+    */
 
     Alert.alert("Publisert", "Turen er opprettet (dummy).", [
       { text: "OK", onPress: () => r.back() },
