@@ -2,6 +2,7 @@ import { createContext, useContext, useCallback, useEffect, useState } from "rea
 import users from "src/data/users";
 import { account } from "Appwrite/providers";
 import { ID } from "react-native-appwrite";
+import { Alert } from "react-native";
 
 export const ROLES = {
   ADMIN: "admin",
@@ -81,6 +82,33 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
         role: role,
       });
     } catch (error) {
+      //Feilhåndtering
+      const err: any = error;
+      const message = err?.message || err?.response?.message || JSON.stringify(err);
+      const code = err?.code ?? err?.response?.code;
+      const type = err?.type ?? err?.response?.type;
+
+      //Sjekk om en session allerede eksisterer
+      const sessionExists =
+        typeof message === "string" && message.toLowerCase().includes("session") ||
+        type === "user_session_already_exists" ||
+        code === 401;
+
+      if (sessionExists) {
+        try {
+          const userData = await account.get();
+          setUser({
+            id: userData.$id,
+            displayName: userData.name || "",
+            email: userData.email,
+            role: role,
+          });
+          return;
+        } catch (getErr) {
+          console.warn("Failed to read existing session user:", getErr);
+        }
+      }
+      Alert.alert("Innlogging feilet", message.toString());
       throw error;
     } finally {
       setIsLoading(false);
