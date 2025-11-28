@@ -2,6 +2,7 @@ import { Tabs, Redirect } from 'expo-router';
 import { useAuth } from '../../Appwrite/providers/auth';
 import { useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { AppTabs } from '../components/AppTabs';
 
 export default function TouristTabs() {
     const theme = useColorScheme();
@@ -9,21 +10,7 @@ export default function TouristTabs() {
   //if (!token || role !== 'tourist') return <Redirect href="/(auth)/sign-in" />;
 
   return (
-    <Tabs
-      initialRouteName="index"
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: theme === "dark" ? "#ffffff" : "#111827",
-        tabBarInactiveTintColor: "#9CA3AF",
-        tabBarStyle: {
-          backgroundColor: theme === "dark" ? "#0B1220" : "#ffffff",
-          borderTopColor: "#E5E7EB",
-          height: 100,
-          paddingTop: 6,
-        },
-        tabBarLabelStyle: { fontSize: 12, fontWeight: "600" },
-      }}
-    >
+    <AppTabs>
       <Tabs.Screen 
         name="index" 
         options={{ 
@@ -64,6 +51,6 @@ export default function TouristTabs() {
       <Tabs.Screen name="checkout/index" options={{ href: null }}/>
       <Tabs.Screen name="review/[bookingId]" options={{ href: null }}/>
       <Tabs.Screen name="ticket/[bookingId]" options={{ href: null }}/>
-    </Tabs>
+    </AppTabs>
   );
 }
