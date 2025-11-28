@@ -1,5 +1,8 @@
 import type { Models } from 'react-native-appwrite';
 
+//Definerer Tour interface som benyttes for turdata
+//Bruker Models.Row for å inkludere Appwrite sine standard felter
+
 export interface Tour extends Models.Row {
   title: string;
   startDate: string;
@@ -13,6 +16,9 @@ export interface Tour extends Models.Row {
   spotsLeft: number | null;
   imageURL: string | null;
 }
+
+//Her er noen dummy data for turer som bruktes før Appwrite ble integrert
+
 /*
 export const TOURS: Tour[] = [
   {
