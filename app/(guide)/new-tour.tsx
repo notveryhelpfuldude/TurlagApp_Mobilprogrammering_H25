@@ -59,7 +59,7 @@ export default function NewTourScreen() {
         distanceKM: null,
         difficulty: null,
         spotsLeft: seatsNum,
-        imageURL: imageUri || null,
+        imageURL: imageUri || DUMMY_IMG,
         $sequence: 0,
         $tableId: ""
       };
