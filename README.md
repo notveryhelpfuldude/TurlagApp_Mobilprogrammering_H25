@@ -8,7 +8,7 @@ Dette prosjektet er en rollebasert turlags-app bygget med **Expo / React Native 
 Appen har tre hovedroller:
 
 - **Turist** – kan bla i turer, legge til ønskeliste, booke og se sine bookinger.
-- **Guide** – kan registrere seg som guide og opprette egne turer (lokal “fake DB”).
+- **Guide** – kan registrere seg som guide og opprette egne turer
 - **Admin** – enkel admin-del med plassholdere for fremtidig funksjonalitet.
 
 Navigasjonen er bygget med **expo-router** og delt opp i egne “stacks” per rolle.
