@@ -21,7 +21,6 @@ type User = {
   role: Role;
 };
 
-
 type AuthContextType = {
   user: User | null;
   isLoading: boolean;
@@ -29,9 +28,6 @@ type AuthContextType = {
   register: (email: string, password: string, role: Role) => Promise<void>;
   logout: () => Promise<void>;
 };
-
-
-
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -41,7 +37,7 @@ const AuthContext = createContext<AuthContextType>({
   logout: async () => {},
 });
 
-
+//Simulert funksjon for å hente brukerdata
 const getUser = async (fail = false) =>
   new Promise<{ data: User | null }>((resolve, reject) => {
     setTimeout(() => {
@@ -50,6 +46,8 @@ const getUser = async (fail = false) =>
     }, 400);
   });
 
+
+//Multipurpose AuthProvider component
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -70,11 +68,13 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const login = async (email: string, password: string, role: Role) => {
     setIsLoading(true);
     try {
+      //Opprett session med Appwrite
       await account.createEmailPasswordSession({
         email,
         password,
       });
       const userData = await account.get();
+      //Oppdater bruker state
       setUser({
         id: userData.$id,
         displayName: userData.name || "",
@@ -94,6 +94,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
         type === "user_session_already_exists" ||
         code === 401;
 
+      //Hvis session eksisterer, hent brukerdata
       if (sessionExists) {
         try {
           const userData = await account.get();
@@ -114,6 +115,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       setIsLoading(false);
     }
   };
+  //Enkel logout funksjon
   const logout = async () => {
     setIsLoading(true);
     try {
@@ -126,6 +128,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
   };
   
+  //Enkel register funksjon
   const register = async (email: string, password: string, role: Role) => {
     setIsLoading(true);
     try {
