@@ -7,21 +7,20 @@ import { account, testConnection } from "Appwrite/providers";
 import "./tailwind.css";
 import { router } from "expo-router";
 import { WishlistProvider } from "@/src/context/WishlistContext";
+import { BookingProvider } from "../src/context/BookingContext"; 
 
 
 export default function RootLayout() {
   
   return (
-    // <AuthProvider>
-      
-    //   <AuthGateway />
-      
-    // </AuthProvider>
+    
     <AuthProvider>
-  <WishlistProvider>
-    <AuthGateway />
-  </WishlistProvider>
-</AuthProvider>
+      <WishlistProvider>
+        <BookingProvider>
+          <AuthGateway />
+        </BookingProvider>
+      </WishlistProvider>
+    </AuthProvider>
   );
 }
 function AuthGateway() {
