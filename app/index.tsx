@@ -1,5 +1,6 @@
 import { View, Text, Pressable } from "react-native";
 import { Link } from "expo-router";
+import { registerRootComponent } from 'expo';
 
 export default function Home() {
   return (
@@ -13,8 +14,7 @@ export default function Home() {
     >
       <Text style={{ fontSize: 22, fontWeight: "700" }}>Velkommen 🎉</Text>
 
-      {/* Link som åpner LoginForm-siden */}
-      <Link href="/(auth)/LoginForm" asChild>
+      <Link href="/(auth)/sign-in" asChild>
         <Pressable
           style={{
             backgroundColor: "#2563eb",

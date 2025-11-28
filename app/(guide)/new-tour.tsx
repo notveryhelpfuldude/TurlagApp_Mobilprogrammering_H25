@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { View, Text, TextInput, Pressable, Alert, Image, ScrollView } from "react-native";
-import { fakeDb } from "../../src/types/fakeDb";
+import { addTour } from "../../Appwrite/providers/tourprovider";
 import { useRouter } from "expo-router";
+import { Tour } from "@/src/data/tours";
+import { ID } from "react-native-appwrite";
 
 // I alpha trykker vi bare "Velg bilde (dummy)" som setter en placeholder-URI.
 // Når backend er klar: bruk ImagePicker eller last opp til S3 og lagre URL.
@@ -20,7 +22,7 @@ export default function NewTourScreen() {
 
   const onPickDummy = () => setImageUri(DUMMY_IMG);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!title.trim()) {
       Alert.alert("Mangler tittel", "Gi turen en tittel.");
       return;
@@ -42,22 +44,39 @@ export default function NewTourScreen() {
       return;
     }
 
-    // I alpha antar vi at "innlogget guide" har id "demo-guide-1".
-    const row = fakeDb.createTour({
-      guideId: "demo-guide-1",
-      imageUri,
-      title: title.trim(),
-      description: desc.trim(),
-      languages: splitCsv(languages),
-      themes: splitCsv(themes),
-      priceNOK,
-      seats: seatsNum,
-    });
+    try {
+      const now = Date.now();
+      const endDate = new Date(now + 7 * 24 * 60 * 60 * 1000).toISOString();
 
-    Alert.alert("Publisert", "Turen er opprettet (dummy).", [
-      { text: "OK", onPress: () => r.back() },
-    ]);
-    // Evt: r.replace("/(guide)/(tabs)"); eller push til en "tour/[id]" side.
+      const newTour: Omit<Tour,"$id" | "$collectionId" | "$databaseId" | "$createdAt" | "$updatedAt" | "$permissions"> = {
+        title: title.trim(),
+        startDate: new Date(now).toISOString(),
+        endDate: endDate,
+        priceNOK: priceNOK,
+        maxParticipants: seatsNum,
+        location: "Ikke satt",
+        tourDescription: desc.trim(),
+        distanceKM: null,
+        difficulty: null,
+        spotsLeft: seatsNum,
+        imageURL: imageUri || DUMMY_IMG,
+        $sequence: 0,
+        $tableId: ""
+      };
+      await addTour(newTour);
+
+
+      Alert.alert("Publisert", "Turen er opprettet og lagret i databasen.", [
+        { text: "OK", onPress: () => r.back() },
+      ]);
+    } catch (error) {
+      console.error("Failed to create tour:", error);
+      Alert.alert("Feil", "Kunne ikke lagre turen. Prøv igjen.");
+    }
+    finally {
+      r.back();
+    }
+
   };
 
   return (

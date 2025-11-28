@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -9,50 +9,33 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { fakeDb } from "../../src/types/fakeDb";
-import type { GuideProfile, Tour } from "../../src/types/types";
+import {
+  GUIDE_PROFILE,
+  GUIDE_TOURS,
+  GuideTour,
+} from "../../src/data/guide";
 
 export default function GuideProfileScreen() {
-  const [profile, setProfile] = useState<GuideProfile | null>(null);
+  // Dummy-profil fra data/guide.ts
+  const [profile, setProfile] = useState(GUIDE_PROFILE);
 
-  const [bio, setBio] = useState("");
-  const [languages, setLanguages] = useState("");
-  const [themes, setThemes] = useState("");
-  const [price, setPrice] = useState("");
-  const [availability, setAvailability] = useState("");
+  // Ekstra felt som KUN lever i UI (ikke i typen din)
+  const [bio, setBio] = useState(profile.bio ?? "");
+  const [languages, setLanguages] = useState("Norsk, Engelsk");
+  const [themes, setThemes] = useState("Historie, Natur, Mat");
+  const [price, setPrice] = useState("500");
+  const [availability, setAvailability] = useState("Man–Lør");
 
-  const myTours = useMemo<Tour[]>(
-    () => (profile ? fakeDb.getMyTours(profile.userId) : []),
-    [profile]
-  );
-
-  useEffect(() => {
-    const p = fakeDb.getMyGuideProfile("current-user-id");
-    setProfile(p);
-    if (p) {
-      setBio(p.bio ?? "");
-      setLanguages(p.languages?.join(", ") ?? "");
-      setThemes(p.themes?.join(", ") ?? "");
-      setPrice(p.priceNOK ? String(p.priceNOK) : "");
-      setAvailability(p.availability ?? "");
-    }
-  }, []);
+  // Dummy “mine turer”
+  const myTours: GuideTour[] = GUIDE_TOURS;
 
   const onSave = () => {
-    if (!profile) {
-      Alert.alert("Mangler profil", "Opprett guideprofil først i 'Bli guide'.");
-      return;
-    }
-    const payload: GuideProfile = {
-      ...profile,
+    // oppdaterer kun lokal state + viser alert (nok for dummy)
+    setProfile((prev) => ({
+      ...prev,
       bio: bio.trim(),
-      languages: splitCsv(languages),
-      themes: splitCsv(themes),
-      priceNOK: Number(price) || 0,
-      availability: availability.trim(),
-    };
-    fakeDb.updateGuideProfile(payload);
-    Alert.alert("Lagret", "Profilen din er oppdatert.");
+    }));
+    Alert.alert("Lagret", "Profilen din er oppdatert (dummy-data).");
   };
 
   return (
@@ -74,32 +57,65 @@ export default function GuideProfileScreen() {
       >
         <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
           <Image
-            source={{ uri: profile?.avatarUri ?? "https://via.placeholder.com/64" }}
-            style={{ width: 56, height: 56, borderRadius: 28, backgroundColor: "#E5E7EB" }}
+            source={{
+              uri: "https://via.placeholder.com/64",
+            }}
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 28,
+              backgroundColor: "#E5E7EB",
+            }}
           />
           <View style={{ gap: 2 }}>
-            <Text style={{ fontWeight: "700" }}>{profile?.displayName ?? profile?.name ?? "Erik Eksempel"}</Text>
-            <Text style={{ color: "#667085", fontSize: 12 }}>4.8 ★ (120)</Text>
+            <Text style={{ fontWeight: "700" }}>
+              {profile.name ?? "Erik Eksempel"}
+            </Text>
+            <Text style={{ color: "#667085", fontSize: 12 }}>
+              {profile.rating} ★ ({profile.totalTours} turer totalt)
+            </Text>
           </View>
         </View>
 
         <Label>Kort bio</Label>
-        <Input multiline value={bio} onChangeText={setBio} placeholder="Lokalhistoriker og friluftsguide." />
+        <Input
+          multiline
+          value={bio}
+          onChangeText={setBio}
+          placeholder="Lokalhistoriker og friluftsguide."
+        />
 
         <Label>Språk</Label>
-        <ChipInput value={languages} onChangeText={setLanguages} placeholder="Norsk, Engelsk" />
+        <ChipInput
+          value={languages}
+          onChangeText={setLanguages}
+          placeholder="Norsk, Engelsk"
+        />
 
         <Label>Temaer</Label>
-        <ChipInput value={themes} onChangeText={setThemes} placeholder="Historie, Natur, Mat" />
+        <ChipInput
+          value={themes}
+          onChangeText={setThemes}
+          placeholder="Historie, Natur, Mat"
+        />
 
         <View style={{ flexDirection: "row", gap: 10 }}>
           <View style={{ flex: 1 }}>
             <Label>Timepris</Label>
-            <Input keyboardType="numeric" value={price} onChangeText={setPrice} placeholder="500" />
+            <Input
+              keyboardType="numeric"
+              value={price}
+              onChangeText={setPrice}
+              placeholder="500"
+            />
           </View>
           <View style={{ flex: 1 }}>
             <Label>Tilgjengelighet</Label>
-            <Input value={availability} onChangeText={setAvailability} placeholder="Man–Lør" />
+            <Input
+              value={availability}
+              onChangeText={setAvailability}
+              placeholder="Man–Lør"
+            />
           </View>
         </View>
 
@@ -113,7 +129,9 @@ export default function GuideProfileScreen() {
             marginTop: 4,
           }}
         >
-          <Text style={{ color: "white", fontWeight: "700" }}>Lagre profil</Text>
+          <Text style={{ color: "white", fontWeight: "700" }}>
+            Lagre profil
+          </Text>
         </Pressable>
       </View>
 
@@ -139,7 +157,13 @@ function Header({ title }: { title: string }) {
 }
 
 function Label({ children }: { children: string }) {
-  return <Text style={{ color: "#111827", fontWeight: "600", marginBottom: 4 }}>{children}</Text>;
+  return (
+    <Text
+      style={{ color: "#111827", fontWeight: "600", marginBottom: 4 }}
+    >
+      {children}
+    </Text>
+  );
 }
 
 function Input(props: React.ComponentProps<typeof TextInput>) {
@@ -179,7 +203,9 @@ function ChipInput(props: React.ComponentProps<typeof TextInput>) {
   );
 }
 
-function MiniTour({ tour }: { tour: Tour }) {
+function MiniTour({ tour }: { tour: GuideTour }) {
+  const prettyDate = new Date(tour.date).toLocaleString("nb-NO");
+
   return (
     <View
       style={{
@@ -192,17 +218,36 @@ function MiniTour({ tour }: { tour: Tour }) {
       }}
     >
       <Text style={{ fontWeight: "700" }}>{tour.title}</Text>
-      <Text style={{ color: "#667085", fontSize: 12 }}>Neste: {tour.nextStart ?? "14:10 → 10:00"}</Text>
-      <View style={{ flexDirection: "row", gap: 10, marginTop: 6 }}>
+      <Text style={{ color: "#667085", fontSize: 12 }}>
+        Neste: {prettyDate}
+      </Text>
+      <Text style={{ color: "#667085", fontSize: 12 }}>
+        Påmeldte: {tour.participants} / {tour.maxParticipants}
+      </Text>
+      <View
+        style={{ flexDirection: "row", gap: 10, marginTop: 6 }}
+      >
         <Pressable
           onPress={() => {}}
-          style={{ borderWidth: 1, borderColor: "#CBD5E1", paddingVertical: 8, paddingHorizontal: 14, borderRadius: 10 }}
+          style={{
+            borderWidth: 1,
+            borderColor: "#CBD5E1",
+            paddingVertical: 8,
+            paddingHorizontal: 14,
+            borderRadius: 10,
+          }}
         >
           <Text style={{ fontWeight: "600" }}>Rediger</Text>
         </Pressable>
         <Pressable
           onPress={() => {}}
-          style={{ borderWidth: 1, borderColor: "#CBD5E1", paddingVertical: 8, paddingHorizontal: 14, borderRadius: 10 }}
+          style={{
+            borderWidth: 1,
+            borderColor: "#CBD5E1",
+            paddingVertical: 8,
+            paddingHorizontal: 14,
+            borderRadius: 10,
+          }}
         >
           <Text style={{ fontWeight: "600" }}>Skjul</Text>
         </Pressable>

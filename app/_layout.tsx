@@ -1,20 +1,46 @@
 import { Slot } from "expo-router";
-import { View } from "react-native";
-import { Stack } from 'expo-router';
-import AuthProvider, {useAuth} from '../src/state/auth';
-import { Children } from "react";
+import AuthProvider, {useAuth} from '../Appwrite/providers/auth';
+import { useEffect } from "react";
+import "./tailwind.css";
+import { router } from "expo-router";
+import { WishlistProvider } from "@/src/context/WishlistContext";
+import { BookingProvider } from "../src/context/BookingContext"; 
 
-export  function RootLayout() {
+
+export default function RootLayout() {
+  
   return (
+    
     <AuthProvider>
-      {Children.only(<Slot />)}
+      <WishlistProvider>
+        <BookingProvider>
+          <AuthGateway />
+        </BookingProvider>
+      </WishlistProvider>
     </AuthProvider>
   );
 }
-export default function LayoutWithProviders() {
-  return (
-    <AuthProvider>
-      <RootLayout></RootLayout>
-    </AuthProvider>
-  )
+function AuthGateway() {
+  const { user, isLoading } = useAuth();
+  useEffect(() => {
+    console.log("AuthGateway - user:", user, "isLoading:", isLoading);
+    if (isLoading) return;
+    if (user) {
+      switch (user.role) {
+        case "admin":
+          router.replace("/(admin)/profile");
+          break;
+        case "guide":
+          router.replace("/(guide)/");
+          break;
+        case "tourist":
+          router.replace("/(tourist)/");
+          break;
+        default:
+          router.replace("/(auth)/sign-in");
+      }
+    }
+  }, [user, isLoading]);
+
+   return <Slot />;
 }

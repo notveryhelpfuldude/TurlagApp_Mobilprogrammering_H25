@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {
   View,
@@ -9,105 +10,135 @@ import {
   Alert,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { useBookings } from "src/context/BookingContext";
 
 type PaymentStatus = "idle" | "processing" | "success" | "error";
 
 export default function CheckoutScreen() {
   const router = useRouter();
-  const { activityId, title, price } = useLocalSearchParams<{
-    activityId: string;
-    title: string;
-    price: string;
+  const { addBooking } = useBookings();
+
+  const params = useLocalSearchParams<{
+    activityId?: string;
+    id?: string;
+    title?: string;
+    price?: string;
   }>();
 
-  const [phone, setPhone] = useState("");
+  const activityId = (params.activityId ?? params.id) ?? null;
+  const tourTitle = params.title ?? "Ukjent tur";
+  const tourPrice = Number(params.price ?? 0);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");  
+  const [participants, setParticipants] = useState("1");
   const [status, setStatus] = useState<PaymentStatus>("idle");
-
-  const numericPrice = Number(price ?? 0);
-
-  function simulateVippsPayment() {
-    if (!phone || phone.length < 8) {
-      Alert.alert("Feil", "Skriv inn et gyldig mobilnummer.");
-      return;
-    }
-
-    setStatus("processing");
-
-    // Simulerer at vi åpner Vipps og får svar etter 2 sekunder
-    setTimeout(() => {
-      const success = true; // du kan flippe denne for å teste feil
-
-      if (success) {
-        setStatus("success");
-
-        // Naviger til billett/kvittering etter en liten pause
-        setTimeout(() => {
-          router.replace({
-            pathname: "/(tourist)/ticket/[id]",
-            params: {
-              id: `${activityId}-fakeBookingId`,
-              title,
-              price: numericPrice.toString(),
-            },
-          });
-        }, 800);
-      } else {
-        setStatus("error");
-        Alert.alert(
-          "Betaling feilet",
-          "Vipps-betalingen ble avbrutt eller feilet (simulering)."
-        );
-      }
-    }, 2000);
-  }
 
   const isProcessing = status === "processing";
 
+  function handleVippsPayment() {
+    if (!phoneNumber.trim()) {
+      Alert.alert(
+        "Manglende informasjon",
+        "Vennligst fyll inn alle feltene før du fortsetter."
+        
+      );
+      return;
+    }
+
+    if (isProcessing) return;
+
+    setStatus("processing");
+
+    setTimeout(() => {
+      try {
+        const bookingId = Date.now().toString();
+
+        addBooking({
+          id: bookingId,
+          activityId,
+          title: tourTitle,
+          price: tourPrice,
+          customerName: name.trim(),
+          customerEmail: email.trim(),
+          phoneNumber: phoneNumber.trim(),       
+          createdAt: new Date().toISOString(),
+        });
+
+        setStatus("success");
+
+        router.replace({
+          pathname: "/(tourist)/ticket/[bookingId]",
+          params: { bookingId },
+        });
+      } catch (error) {
+        setStatus("error");
+        Alert.alert(
+          "Noe gikk galt",
+          "Betalingen feilet. Prøv igjen senere."
+        );
+      }
+    }, 1000);
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Betaling (Vipps-simulering)</Text>
+      <Text style={styles.heading}>Betaling</Text>
 
-      <View style={styles.card}>
+      <View style={styles.summaryCard}>
         <Text style={styles.label}>Tur</Text>
-        <Text style={styles.value}>{title ?? "Ukjent tur"}</Text>
+        <Text style={styles.value}>{tourTitle}</Text>
 
-        <Text style={[styles.label, { marginTop: 12 }]}>Pris</Text>
-        <Text style={styles.price}>
-          {Number.isNaN(numericPrice) ? "—" : `${numericPrice} kr`}
+        <Text style={[styles.label, { marginTop: 12 }]}>
+          Pris per person
         </Text>
-      </View>
+        <Text style={styles.value}>{tourPrice} kr</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.label}>Ditt mobilnummer (Vipps)</Text>
+        <Text style={[styles.label, { marginTop: 12 }]}>Deltakere</Text>
         <TextInput
-          keyboardType="phone-pad"
-          placeholder="f.eks. 41234567"
-          value={phone}
-          onChangeText={setPhone}
           style={styles.input}
+          value={participants}
+          onChangeText={setParticipants}
+          keyboardType="number-pad"
         />
       </View>
 
-      <Pressable
-        style={({ pressed }) => [
-          styles.vippsButton,
-          (pressed || isProcessing) && styles.vippsButtonPressed,
-          isProcessing && styles.vippsButtonDisabled,
-        ]}
-        onPress={simulateVippsPayment}
-        disabled={isProcessing}
-      >
-        {isProcessing ? (
-          <>
-            <ActivityIndicator />
-            <Text style={styles.vippsButtonText}> Sender til Vipps …</Text>
-          </>
-        ) : (
-          <Text style={styles.vippsButtonText}>Betal med Vipps (simulering)</Text>
-        )}
-      </Pressable>
+      <View style={{ marginTop: 20 }}>
+        <Text style={styles.sectionTitle}>Dine opplysninger</Text>
 
-      
+       
+        <Text style={styles.label}>Telefonnummer</Text>
+        <TextInput
+          style={styles.input}
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
+          placeholder="8 sifre"
+          keyboardType="phone-pad"
+        />
+      </View>
+
+      <View style={styles.footer}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.vippsButton,
+            isProcessing && styles.vippsButtonDisabled,
+            pressed && !isProcessing && { opacity: 0.8 },
+          ]}
+          onPress={handleVippsPayment}
+          disabled={isProcessing}
+        >
+          {isProcessing ? (
+            <ActivityIndicator color="#ffffff" />
+          ) : (
+            <Text style={styles.vippsButtonText}>Betal med Vipps</Text>
+          )}
+        </Pressable>
+
+        <Text style={styles.helperText}>
+          Du vil bli omdirigert til Vipps for å fullføre betalingen.
+        </Text>
+      </View>
     </View>
   );
 }
@@ -117,55 +148,53 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#050505",
     padding: 20,
-    gap: 16,
   },
   heading: {
     fontSize: 22,
     fontWeight: "700",
     color: "#ffffff",
-    marginBottom: 4,
+    marginBottom: 16,
   },
-  card: {
-    backgroundColor: "#151515",
+  summaryCard: {
+    backgroundColor: "#111827",
+    borderRadius: 16,
     padding: 16,
-    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#2c2c2c",
+    borderColor: "#1f2933",
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#ffffff",
+    marginBottom: 8,
   },
   label: {
-    fontSize: 13,
-    color: "#aaaaaa",
+    fontSize: 12,
+    color: "#9ca3af",
   },
   value: {
     fontSize: 16,
     color: "#ffffff",
     marginTop: 2,
   },
-  price: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#ffffff",
-    marginTop: 2,
-  },
   input: {
-    marginTop: 8,
-    backgroundColor: "#1f1f1f",
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    marginTop: 4,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#4b5563",
     color: "#ffffff",
+  },
+  footer: {
+    marginTop: "auto",
   },
   vippsButton: {
-    marginTop: 8,
-    borderRadius: 999,
+    marginTop: 20,
+    backgroundColor: "#ff5b24",
     paddingVertical: 14,
+    borderRadius: 999,
     alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    backgroundColor: "#ff5b24", // Vipps-aktig farge (simulert)
-  },
-  vippsButtonPressed: {
-    opacity: 0.85,
   },
   vippsButtonDisabled: {
     opacity: 0.6,
@@ -178,5 +207,7 @@ const styles = StyleSheet.create({
   helperText: {
     fontSize: 12,
     color: "#888888",
+    marginTop: 8,
+    textAlign: "center",
   },
 });
