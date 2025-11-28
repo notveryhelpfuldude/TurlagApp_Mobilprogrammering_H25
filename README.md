@@ -1,6 +1,30 @@
 # TurlagApp_Mobilprogrammering_H25
 Appen gjør det lettere for turister å finne, bestille og delta på turer, opplevelser og generell turisme med en plattform som setter sammen arrangører(guides) og brukere/turister.
 
+# Veiledning
+For å starte appen, må man ha Expo Go
+
+- Clone repo https://github.com/notveryhelpfuldude/TurlagApp_Mobilprogrammering_H25 fra github
+- bruk terminalen for å lokalisere root mappa.
+- filen VERDIER.txt inneholder nøkler. Flytt disse til .env i root mappa
+- Deretter bruk:
+- pnpm i
+- npx expo start
+
+Inne i Appen kan du velge å registrere ny bruker.
+Den kan du bruke for å logge deg inn med.
+Hvilken rolle du velger har ingen betydning.
+Alle brukere er like og kan logge seg til hvilken side de vil
+
+# Oppgave
+1 - Opprett ny bruker
+2 - velg guide på logg inn siden og logg inn med nylagde bruker
+3 - gå til dashbordet og lag en ny tur (fyll inn detaljer. Trenger ikke bilde) så publiser turen.
+4 - gå til index og logg ut.
+5 - Logg inn på brukeren din som turist
+
+Når du har gjort dette skal du kunne se den turen du har laget som guide.
+
 
 # TurlagApp – Mobilapplikasjon (Expo / React Native / Appwrite)
 
